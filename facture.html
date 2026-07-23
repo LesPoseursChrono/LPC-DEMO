@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>LPC</title>
+
+<style>
+
+body{
+
+    margin:0;
+
+    background:#eceff1;
+
+    font-family:Arial,Helvetica,sans-serif;
+
+}
+
+.facture{
+
+    width:900px;
+
+    margin:40px auto;
+
+    background:white;
+
+    padding:50px;
+
+    box-shadow:0 0 25px rgba(0,0,0,.18);
+
+}
+
+.entete{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    border-bottom:3px solid #0B4EA2;
+
+    padding-bottom:25px;
+
+}
+
+.logo{
+
+    font-size:34px;
+
+    font-weight:bold;
+
+}
+
+.logo span{
+
+    color:#0B4EA2;
+
+}
+
+h1{
+
+    margin:0;
+
+    color:#0B4EA2;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="facture">
+
+<div class="entete">
+
+<div class="logo">
+
+Les Poseurs <span>Chrono</span>
+
+</div>
+
+<div>
+
+<h1><span id="titreDocument">FACTURE</span></h1>
+
+</div>
+
+</div>
+<div style="display:flex;justify-content:space-between;margin-top:40px;">
+
+    <div style="width:48%;">
+
+        <h3 style="color:#0B4EA2;">FACTURÉ À</h3>
+
+        <p>
+    <strong id="clientNom">M. Jean Dupont</strong><br>
+
+    <span id="clientAdresse">
+        12 rue des Lilas<br>
+        42100 Saint-Étienne
+    </span>
+
+    <br><br>
+
+    📞 <span id="clientTelephone">06 00 00 00 00</span>
+<br>
+
+✉️ <span id="clientMail">jean.dupont@mail.com</span>
+
+</p>
+
+    </div>
+
+    <div style="width:48%;text-align:right;">
+
+        <h3 style="color:#0B4EA2;">ÉMETTEUR</h3>
+
+        <p>
+            <strong>Les Poseurs Chrono</strong><br>
+            Antenne LPC Saint-Étienne<br>
+            SIRET : 123 456 789 00010
+        </p>
+
+        <p>
+
+          <strong><span id="libelleDocument">Facture</span> :</strong>
+<span id="numeroDocument">LPC-2026-000001</span><br>
+
+            <strong>Date :</strong> <span id="dateDocument"></span>
+
+        </p>
+
+    </div>
+
+</div>
+<table style="width:100%;border-collapse:collapse;margin-top:40px;">
+
+    <tr style="background:#0B4EA2;color:white;">
+
+        <th style="padding:12px;text-align:left;">Désignation</th>
+
+        <th style="padding:12px;text-align:center;">Qté</th>
+
+        <th style="padding:12px;text-align:right;">Prix HT</th>
+
+        <th style="padding:12px;text-align:right;">Total HT</th>
+
+    </tr>
+
+    <tr>
+
+       <td id="designation" style="padding:14px;border-bottom:1px solid #ddd;">
+    Pose complète de cuisine
+</td>
+
+        <td style="padding:14px;text-align:center;border-bottom:1px solid #ddd;">
+            1
+        </td>
+
+        <td id="ligneHT" style="padding:14px;text-align:right;border-bottom:1px solid #ddd;">
+    1 200,00 €
+</td>
+
+       <td id="ligneTotalHT" style="padding:14px;text-align:right;border-bottom:1px solid #ddd;">
+    1 200,00 €
+</td>
+
+    </tr>
+
+</table>
+
+<div style="width:320px;margin-left:auto;margin-top:30px;">
+
+<table style="width:100%;">
+
+<tr>
+
+<td>Total HT</td>
+
+<td id="totalHT" style="text-align:right;">1 200,00 €</td>
+
+</tr>
+
+<tr>
+
+<td>TVA (20 %)</td>
+
+<td id="tva" style="text-align:right;">240,00 €</td>
+
+</tr>
+
+<tr style="font-size:22px;font-weight:bold;color:#0B4EA2;">
+
+<td>Total TTC</td>
+
+<td id="totalTTC" style="text-align:right;">1 440,00 €</td>
+</tr>
+
+</table>
+
+</div>
+<div style="
+margin-top:50px;
+background:#f4f4f4;
+border-left:6px solid #0B4EA2;
+padding:25px;
+border-radius:8px;
+">
+
+<h3 style="margin-top:0;color:#0B4EA2;">
+Émission automatique
+</h3>
+
+<p style="margin:12px 0;font-size:17px;">
+
+✅ Générée par LPC
+
+</p>
+
+<p style="margin:12px 0;font-size:17px;">
+
+⏱ Temps passé par le franchisé :
+<strong>00 min 00 s</strong>
+
+</p>
+
+<p style="margin-top:20px;color:#666;font-size:14px;">
+
+Cette facture a été générée automatiquement par la plateforme LPC,
+transmise au client et archivée dans le dossier chantier.
+
+</p>
+
+</div>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+const dateDocument = new Date().toLocaleDateString("fr-FR");
+
+document.getElementById("dateDocument").textContent = dateDocument;
+    const nom = localStorage.getItem("clientNom");
+    const adresse = localStorage.getItem("clientAdresse");
+const telephone = localStorage.getItem("clientTelephone");
+const mail = localStorage.getItem("clientMail");
+    if (nom) {
+        document.getElementById("clientNom").textContent = nom;
+    }
+
+    if (adresse) {
+        document.getElementById("clientAdresse").innerHTML =
+            adresse.replace(/\n/g, "<br>");
+    }
+if (telephone) {
+    document.getElementById("clientTelephone").textContent = telephone;
+}
+if (mail) {
+    document.getElementById("clientMail").textContent = mail;
+}
+const designation = localStorage.getItem("designation");
+const totalHT = localStorage.getItem("totalHT");
+const tva = localStorage.getItem("tva");
+const totalTTC = localStorage.getItem("totalTTC");
+
+if (designation) {
+    document.getElementById("designation").textContent = designation;
+}
+
+if (totalHT) {
+    const ht = Number(totalHT).toLocaleString("fr-FR", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    }) + " €";
+
+    document.getElementById("ligneHT").textContent = ht;
+    document.getElementById("ligneTotalHT").textContent = ht;
+    document.getElementById("totalHT").textContent = ht;
+}
+
+if (tva) {
+    document.getElementById("tva").textContent =
+        Number(tva).toLocaleString("fr-FR", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }) + " €";
+}
+
+if (totalTTC) {
+    document.getElementById("totalTTC").textContent =
+        Number(totalTTC).toLocaleString("fr-FR", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }) + " €";
+}
+const numeroDocument = localStorage.getItem("numeroDocument");
+
+if (numeroDocument) {
+    document.getElementById("numeroDocument").textContent = numeroDocument;
+}
+});
+</script>
+<script>
+
+const typeDocument = localStorage.getItem("typeDocument");
+
+if(typeDocument === "devis"){
+
+    document.getElementById("libelleDocument").textContent = "Devis";
+    document.getElementById("titreDocument").textContent = "DEVIS";
+
+    document.title = "DEVIS LPC";
+
+}else{
+
+    document.getElementById("libelleDocument").textContent = "Facture";
+    document.getElementById("titreDocument").textContent = "FACTURE";
+
+    document.title = "FACTURE LPC";
+
+}
+</script>
+</body>
+
+</html>

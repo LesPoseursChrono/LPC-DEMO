@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Les Poseurs Chrono | Réseau National d'Installation de Cuisines</title>
+    <style>
+        :root {
+            --blue-chrono: #1E3A8A;
+            --green-chrono: #10B981;
+            --dark-text: #1F2937;
+            --light-bg: #F3F4F6;
+            --border-color: #E5E7EB;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+
+        #simulateur {
+            scroll-margin-top: 100px;
+        }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+        .logo { font-weight: 800; font-size: 1.5rem; color: var(--blue-chrono); text-decoration: none; }
+        .logo span { color: var(--green-chrono); }
+        
+        .badge-network {
+            background: #EFF6FF;
+            color: var(--blue-chrono);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid #BFDBFE;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1E3A8A 0%, #0F172A 100%);
+            color: white;
+            padding: 50px 20px;
+        }
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.10fr 0.90fr;
+            gap: 40px;
+            align-items: center;
+        }
+        .hero-text { text-align: left; }
+        .hero h1 { font-size: 2.6rem; margin-top: 0; font-weight: 800; line-height: 1.2; }
+        .hero h1 span { color: var(--green-chrono); }
+        .hero p { font-size: 1.1rem; color: #93C5FD; margin: 15px 0 25px 0; }
+        
+        .hero-gallery{
+    display:flex;
+    gap:20px;
+    justify-content:center;
+    align-items:center;
+}
+
+.hero-card{
+    flex:1;
+    border-radius:14px;
+    overflow:hidden;
+    box-shadow:0 18px 40px rgba(0,0,0,.30);
+    transition:.35s;
+}
+
+.hero-card img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+.hero-card:hover{
+    transform:translateY(-8px);
+}
+
+        .btn-primary {
+            background: var(--green-chrono);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+            display: inline-block;
+            transition: transform 0.2s;
+        }
+        .btn-primary:hover { transform: translateY(-2px); }
+.hero-benefits{
+
+margin-top:35px;
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:12px;
+
+}
+
+.hero-benefits div{
+
+background:rgba(255,255,255,.10);
+
+padding:14px;
+
+border-radius:10px;
+
+font-weight:600;
+
+backdrop-filter:blur(6px);
+
+border:1px solid rgba(255,255,255,.15);
+
+}
+
+        .app-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--blue-chrono);
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            color: var(--blue-chrono);
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+        .form-group { display: flex; flex-direction: column; }
+        .col-1 { grid-column: span 1; }
+        .col-2 { grid-column: span 2; }
+        .col-3 { grid-column: span 3; }
+        .col-4 { grid-column: span 4; }
+
+        label { font-size: 0.85rem; font-weight: 600; margin-bottom: 5px; color: #4B5563; }
+        input, select { padding: 10px; border: 1px solid #D1D5DB; border-radius: 6px; font-size: 0.9rem; background: white; }
+
+        .simulator-layout {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 25px;
+            align-items: start;
+        }
+
+        .left-panel {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .option-box {
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .option-box.active {
+            border-color: var(--green-chrono);
+            background-color: #F0FDF4;
+        }
+
+        .option-box input {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+
+        .option-title { font-weight: 700; color: var(--blue-chrono); font-size: 0.95rem; margin-bottom: 5px; }
+        .option-desc { font-size: 0.85rem; color: #6B7280; }
+
+        .element-row.disabled {
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .element-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+            transition: opacity 0.3s ease;
+        }
+
+        .element-info { max-width: 65%; }
+        .element-name { font-weight: 600; color: var(--dark-text); font-size: 0.95rem; }
+        .element-desc { font-size: 0.8rem; color: #9CA3AF; }
+
+        .counter-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn-counter {
+            background: var(--blue-chrono);
+            color: white;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn-counter:hover { background-color: #1e40af; }
+        
+        .btn-counter:disabled {
+            background: #D1D5DB;
+            cursor: not-allowed;
+        }
+
+        .counter-value { font-weight: 700; font-size: 1.05rem; min-width: 24px; text-align: center; }
+
+        .displacement-static-box {
+            margin-top: 25px;
+            background-color: #F9FAFB;
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            color: var(--dark-text);
+            font-weight: 600;
+            transition: opacity 0.3s ease;
+        }
+        .displacement-static-box.disabled {
+            opacity: 0.4;
+        }
+
+        .right-panel {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+            position: sticky;
+            top: 90px;
+        }
+
+        .ticket-header { text-align: left; margin-bottom: 15px; }
+        .ticket-brand { font-size: 1.3rem; font-weight: 800; color: var(--blue-chrono); margin: 0; }
+        .ticket-brand span { color: var(--green-chrono); }
+        .ticket-meta { font-size: 0.8rem; color: #6B7280; margin: 3px 0; }
+
+        .client-billing-box {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px dashed var(--border-color);
+            font-size: 0.85rem;
+            color: #374151;
+        }
+        .client-billing-box strong { color: var(--blue-chrono); }
+
+        .ticket-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.9rem; }
+        .ticket-table th, .ticket-table td { padding: 8px 0; text-align: left; border-bottom: 1px solid var(--border-color); }
+        .ticket-table td.price { text-align: right; font-weight: 600; }
+
+        .remise-texte { color: var(--green-chrono); font-weight: 700; }
+
+        .totals-section {
+            border-top: 2px dashed var(--border-color);
+            padding-top: 15px;
+            font-size: 0.9rem;
+        }
+        .total-row { display: flex; justify-content: space-between; margin-bottom: 6px; }
+        .total-main { font-size: 1.3rem; font-weight: 800; color: var(--blue-chrono); margin-top: 10px; border-top: 1px solid var(--border-color); padding-top: 10px;}
+
+        .signature-container {
+            margin-top: 20px;
+            padding: 12px;
+            border: 2px dashed #10B981;
+            background: #F0FDF4;
+            border-radius: 6px;
+            text-align: center;
+        }
+        .signature-title { font-size: 0.85rem; font-weight: 700; color: #065F46; margin-bottom: 5px; }
+
+        .btn-signature {
+            width: 100%;
+            background: var(--blue-chrono);
+            color: white;
+            border: none;
+            padding: 10px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 15px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-signature:hover { background: #1e40af; }
+
+        .btn-pdf {
+            width: 100%;
+            background: var(--green-chrono);
+            color: white;
+            border: none;
+            padding: 14px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .btn-pdf:hover { background: #059669; }
+.process-section{
+
+max-width:1200px;
+
+margin:70px auto;
+
+padding:0 20px;
+
+text-align:center;
+
+}
+
+.process-section h2{
+
+font-size:2.2rem;
+
+color:#1E3A8A;
+
+margin-bottom:45px;
+
+}
+
+.process-grid{
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:25px;
+
+}
+
+.process-card{
+
+background:white;
+
+padding:30px;
+
+border-radius:18px;
+
+box-shadow:0 12px 30px rgba(0,0,0,.10);
+
+transition:.3s;
+
+}
+
+.process-card:hover{
+
+transform:translateY(-10px);
+
+}
+
+.process-number{
+
+width:55px;
+
+height:55px;
+
+background:#10B981;
+
+color:white;
+
+border-radius:50%;
+
+margin:auto;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:24px;
+
+font-weight:bold;
+
+margin-bottom:20px;
+
+}
+.dashboard-preview{
+
+max-width:1200px;
+
+margin:90px auto;
+
+padding:0 20px;
+
+text-align:center;
+
+}
+
+.dashboard-preview h2{
+
+font-size:2.5rem;
+
+color:#1E3A8A;
+
+margin-bottom:10px;
+
+}
+
+.dashboard-subtitle{
+
+font-size:1.2rem;
+
+color:#666;
+
+margin-bottom:45px;
+
+}
+
+.dashboard-grid{
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:25px;
+
+}
+
+.dashboard-card{
+
+background:white;
+
+padding:30px;
+
+border-radius:18px;
+
+box-shadow:0 15px 35px rgba(0,0,0,.08);
+
+transition:.3s;
+
+}
+
+.dashboard-card:hover{
+
+transform:translateY(-10px);
+
+}
+
+.dashboard-card ul{
+
+list-style:none;
+
+padding:0;
+
+margin-top:20px;
+
+text-align:left;
+
+}
+
+.dashboard-card li{
+
+padding:10px 0;
+
+border-bottom:1px solid #eee;
+
+}
+        footer { background: #1F2937; color: #9CA3AF; text-align: center; padding: 25px 20px; font-size: 0.85rem; margin-top: 60px; }
+
+@media (max-width: 900px) {
+    .hero-container,
+    .form-grid,
+    .simulator-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .col-2,
+    .col-4 {
+        grid-column: span 1;
+    }
+
+    .right-panel {
+        position: static;
+    }
+}
+
+    .hero-benefits {
+        grid-template-columns: 1fr;
+    }
+
+    .logo {
+        font-size: 1rem;
+    }
+
+    .badge-network {
+        font-size: 0.65rem;
+    }
+
+    .left-panel,
+    .right-panel {
+        padding: 15px;
+    }
+
+    .element-name {
+        font-size: 0.9rem;
+    }
+
+    .element-desc {
+        font-size: 0.75rem;
+    }
+
+    .total-main {
+        font-size: 1.15rem;
+    }
+}
+    </style>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">Les Poseurs <span>Chrono</span></a>
+            <div class="badge-network">Réseau National France</div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-text">
+                <h1>L'excellence de la pose de cuisine, <span>la réactivité en plus.</span></h1>
+                <p>Le partenaire tiers de confiance des cuisinistes et des particuliers pour des installations certifiées, sans mauvaises surprises et au tarif juste.</p>
+                <a href="#simulateur" class="btn-primary">Accéder au Simulateur</a>
+<div class="hero-benefits">
+
+    <div>✅ Zéro paperasse</div>
+
+    <div>💳 Paiement sécurisé</div>
+
+    <div>📅 Planning automatisé</div>
+
+    <div>📄 Facturation automatique</div>
+
+</div>
+            </div>
+           <div style="background:white;padding:20px">
+
+<div class="hero-image-wrapper">
+   
+    <div class="promo-card">
+
+        <img src="Images/hero-boost-ca.png"
+             alt="Boostez votre chiffre d'affaires">
+
+    </div>
+
+</section>
+<section class="process-section">
+
+    <h2>Comment fonctionne Les Poseurs Chrono ?</h2>
+
+    <div class="process-grid">
+
+        <div class="process-card">
+            <div class="process-number">1</div>
+            <h3>Simulation</h3>
+            <p>Le cuisiniste ou le particulier obtient instantanément un devis de pose.</p>
+        </div>
+
+        <div class="process-card">
+            <div class="process-number">2</div>
+            <h3>Signature</h3>
+            <p>Le devis est signé électroniquement en quelques secondes.</p>
+        </div>
+
+        <div class="process-card">
+            <div class="process-number">3</div>
+            <h3>Paiement sécurisé</h3>
+            <p>Les fonds sont sécurisés jusqu'à la fin du chantier.</p>
+        </div>
+
+        <div class="process-card">
+            <div class="process-number">4</div>
+            <h3>Planning</h3>
+            <p>Le chantier est automatiquement affecté au franchisé.</p>
+        </div>
+
+    </div>
+
+</section>
+    <div id="simulateur" class="app-container" x-data="{
+        optionVisite: 'pose_engagee',
+        meuble: 0,
+        colonne: 0,
+        plan: 0,
+        credence: 0,
+        plinthes: 0,
+        finition: false,
+        electromenager: 0,
+        genre: 'M.',
+        nom: '',
+        prenom: '',
+        adresse: '',
+        tel: '',
+        mail: '',
+        estSigne: false,
+        dateSignature: '',
+        init() {
+            this.$watch('optionVisite', value => {
+                if (value === 'seule') {
+                    this.meuble = 0;
+                    this.colonne = 0;
+                    this.plan = 0;
+                    this.credence = 0;
+                    this.plinthes = 0;
+                    this.finition = false;
+                    this.electromenager = 0;
+                }
+            });
+        },
+        signerDevis() {
+
+    this.estSigne = true;
+
+    let aujourdhui = new Date();
+
+    this.dateSignature =
+        aujourdhui.toLocaleDateString('fr-FR') +
+        ' à ' +
+        aujourdhui.toLocaleTimeString('fr-FR', {
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+
+    const chantier = {
+        client: this.genre + ' ' + this.prenom + ' ' + this.nom,
+        adresse: this.adresse,
+        telephone: this.tel,
+        mail: this.mail,
+
+        montantHT: this.totalHT.toFixed(2),
+        montantTTC: this.totalTTC.toFixed(2),
+
+        designation:
+            this.optionVisite === 'seule'
+                ? 'Pré-visite technique certifiée'
+                : 'Pose complète de cuisine',
+
+        duree:
+            this.optionVisite === 'seule'
+                ? '2 heures'
+                : '1,5 jour',
+
+        date: aujourdhui.toLocaleDateString('fr-FR'),
+
+        option: this.optionVisite
+    };
+
+    localStorage.setItem(
+        'lpc_nouveau_chantier',
+        JSON.stringify(chantier)
+    );
+},
+nouveauDevis() {
+
+    this.optionVisite = 'pose_engagee';
+
+    this.meuble = 0;
+    this.colonne = 0;
+    this.plan = 0;
+    this.credence = 0;
+    this.plinthes = 0;
+    this.electromenager = 0;
+    this.finition = false;
+
+    this.genre = 'M.';
+    this.nom = '';
+    this.prenom = '';
+    this.adresse = '';
+    this.tel = '';
+    this.mail = '';
+
+    this.estSigne = false;
+    this.dateSignature = '';
+},
+        get pointsElements() {
+            if (this.optionVisite === 'seule') return 0;
+            return (this.meuble * 1) + (this.colonne * 2) + (this.plan * 1) + (this.credence * 1) + (this.plinthes * 1) + (this.finition ? 1 : 0) + (this.electromenager * 1);
+        },
+        get totalPoints() {
+            if (this.optionVisite === 'seule' || this.pointsElements === 0) return 0;
+            return this.pointsElements + 2;
+        },
+        get prixPrevisite() {
+            return this.optionVisite === 'seule' ? 100 : 0;
+        },
+        get prixPoseHT() {
+            return this.totalPoints * 60;
+        },
+        get totalHT() {
+            return this.prixPoseHT + this.prixPrevisite;
+        },
+        get totalTTC() {
+            return Math.round(this.totalHT * 1.20);
+        }
+    }">
+        <div class="simulator-layout">
+            
+            <div class="left-panel">
+                
+                <div class="section-title">1. COORDONNÉES DU CLIENT</div>
+                <div class="form-grid" style="margin-bottom: 30px;">
+                    <div class="form-group col-1">
+                        <label>Civilité</label>
+                        <select x-model="genre">
+                            <option value="M.">M.</option>
+                            <option value="Mme">Mme</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-1.5" style="grid-column: span 1.5;">
+                        <label>Prénom</label>
+                        <input type="text" placeholder="Jean" x-model="prenom">
+                    </div>
+                    <div class="form-group col-1.5" style="grid-column: span 1.5;">
+                        <label>Nom</label>
+                        <input type="text" placeholder="Dupont" x-model="nom">
+                    </div>
+                    <div class="form-group col-4">
+                        <label>Adresse Postale complète</label>
+                        <input type="text" placeholder="12 Rue de la Paix, 75002 Paris" x-model="adresse">
+                    </div>
+                    <div class="form-group col-2">
+                        <label>Téléphone</label>
+                        <input type="tel" placeholder="06 00 00 00 00" x-model="tel">
+                    </div>
+                    <div class="form-group col-2">
+                        <label>Adresse E-mail</label>
+                        <input type="email" placeholder="jean.dupont@mail.com" x-model="mail">
+                    </div>
+                </div>
+
+                <div class="section-title">2. CHOIX DE LA FORMULE DE PRÉ-VISITE</div>
+                <div class="options-grid">
+                    <div class="option-box" :class="optionVisite === 'seule' ? 'active' : ''" @click="optionVisite = 'seule'">
+                        <div class="option-title">Option 1 : Pré-visite Seule</div>
+                        <div class="option-desc">Certification des cotes uniquement, sans engagement de pose.</div>
+                        <input type="radio" name="formule_visite" value="seule" x-model="optionVisite">
+                    </div>
+                    <div class="option-box" :class="optionVisite === 'pose_engagee' ? 'active' : ''" @click="optionVisite = 'pose_engagee'">
+                        <div class="option-title">Option 2 : Formule Pose Engagée</div>
+                        <div class="option-desc">Validation globale. La pré-visite technique bloque le projet.</div>
+                        <input type="radio" name="formule_visite" value="pose_engagee" x-model="optionVisite">
+                    </div>
+                </div>
+
+                <div class="section-title">3. INVENTAIRE DES ÉLÉMENTS DE LA CUISINE</div>
+                
+                <div class="element-row" :class="optionVisite === 'seule' ? 'disabled' : ''">
+                    <div class="element-info">
+                        <div class="element-name">Meuble de cuisine standard <span style="color:#10B981;">(1 point)</span></div>
+                        <div class="element-desc">Bas, Haut, Lave-vaisselle intégré</div>
+                    </div>
+                    <div class="counter-controls">
+                        <button type="button" class="btn-counter" :disabled="optionVisite === 'seule'" @click="if(meuble > 0) meuble--">-</button>
+                        <span class="counter-value" x-text="meuble"></span>
+                        <button type="button" class="btn-counter" :disabled="optionVisite === 'seule'" @click="meuble++">+</button>
+                    </div>
+                </div>
+
+                <div class="element-row" :class="optionVisite === 'seule' ? 'disabled' : ''">
+                    <div class="element-info">
+                        <div class="element-name">Colonne / Armoire Haute <span style="color:#10B981;">(2 points)</span></div>
+                                            </div>
+                    <div class="counter-controls">
+                        <button type="button" class="btn-counter" :disabled="optionVisite === 'seule'" @click="if(colonne > 0) colonne--">-</button>
+                        <span class="counter-value" x-text="colonne"></span>
+                        <button type="button" class="btn-counter" :disabled="optionVisite === 'seule'" @click="colonne++">+</button>
+                    </div>
+                </div>
+
+                <div class="element-row" :class="optionVisite === 'seule' ? 'disabled' : ''">
+                    <div class="element-info">
+                        <div class="element-name">Plan de travail (par portion / découpe) <span style="color:#10B981;">(1 point)</span></div>
+                        <div class="element-desc">Mise en place, 1 découpe incluse</div>
+                    </div>
+                    <div class="counter-controls">
+                        <button type="button" class="btn-counter" :disabled="optionVisite === 'seule'" @click="if(plan > 0) plan--">-</button>
+                        <span class="counter-value" x-text="plan"></span>
+                        <button type="button" class="btn-counter" :disabled="optionVisite === 'seule'" @click="plan++">+</button>
+                    </div>
+                </div>
+
+                <div class="element-row" :class="optionVisite === 'seule' ? 'disabled' : ''">
+                    <div class="element-info">
+                       <div class="element-name">Crédence <span style="color:#10B981;">(1 point)</span></div>
+                        <div class="element-desc">Pose, découpes, perçages</div>
+                    </div>
+                    <div class="counter-controls">
+                        <button type="button" class="btn-counter" :disabled="optionVisite === 'seule'" @click="if(credence > 0) credence--">-</button>
+                        <span class="counter-value" x-text="credence"></span>
+                        <button type="button" class="btn-counter" :disabled="optionVisite === 'seule'" @click="credence++">+</button>
+                    </div>
+                </div>
+
+                <div class="element-row" :class="optionVisite === 'seule' ? 'disabled' : ''">
+                    <div class="element-info">
+                       <div class="element-name">Plinthes du projet <span style="color:#10B981;">(1 point)</span></div>
+                        <div class="element-desc">Ajustement et pose de l'ensemble</div>
+                    </div>
+                    <div class="counter-controls">
+                        <button type="button" class="btn-counter" :disabled="optionVisite === 'seule'" @click="if(plinthes > 0) plinthes--">-</button>
+                        <span class="counter-value" x-text="plinthes"></span>
+                        <button type="button" class="btn-counter" :disabled="optionVisite === 'seule'" @click="plinthes++">+</button>
+                    </div>
+                </div>
+
+                <div class="element-row" :class="optionVisite === 'seule' ? 'disabled' : ''">
+                    <div class="element-info">
+                       <div class="element-name">Électroménagers <span style="color:#10B981;">(1 point)</span></div>
+                        <div class="element-desc">
+Fixation, mise en place et branchement sur alimentation existante uniquement
+</div>
+                    </div>
+                    <div class="counter-controls">
+                        <button type="button" class="btn-counter" :disabled="optionVisite === 'seule'" @click="if(electromenager > 0) electromenager--">-</button>
+                        <span class="counter-value" x-text="electromenager"></span>
+                        <button type="button" class="btn-counter" :disabled="optionVisite === 'seule'" @click="electromenager++">+</button>
+                    </div>
+                </div>
+
+                <div class="element-row" :class="optionVisite === 'seule' ? 'disabled' : ''">
+                    <div class="element-info">
+                        <div class="element-name">Finition Premium <span style="color:#10B981;">(1 point)</span></div>
+                        <div class="element-desc">Plus de 2 fileurs et 2 joues latérales</div>
+                    </div>
+                    <div class="counter-controls">
+                        <input type="checkbox" :disabled="optionVisite === 'seule'" x-model="finition" style="width: 20px; height: 20px; cursor: pointer;">
+                    </div>
+                </div>
+
+                <div class="displacement-static-box" :class="optionVisite === 'seule' ? 'disabled' : ''">
+                    Forfait Déplacement Obligatoire : <span x-text="optionVisite === 'seule' ? '0 Point' : '2 Points (120€)'"></span>
+                </div>
+            </div>
+
+            <div class="right-panel">
+                <div class="ticket-header">
+                    <h3 class="ticket-brand">Les Poseurs <span>Chrono</span></h3>
+                    
+                    <div style="margin-top: 10px; font-weight: 800; font-size: 1.1rem;" :style="estSigne ? 'color: var(--green-chrono);' : 'color: var(--blue-chrono);'" x-text="estSigne ? 'FACTURE ACQUITTÉE' : 'ESTIMATION DEVIS'"></div>
+                    
+   <div style="
+    margin: 12px 0;
+    padding: 10px 14px;
+    background: #EFF6FF;
+    border-left: 4px solid #10B981;
+    border-radius: 6px;
+    color: #1E3A8A;
+    font-size: 0.95rem;
+    font-weight: 800;
+">
+    GRILLE RÉSEAU · 1 POINT = 60 € HT
+</div>                 
+<div class="ticket-meta" x-text="estSigne ? 'Facture N° : LPC-2026-8942' : 'Devis provisoire N° : LPC-D2026'"></div>
+                    <div class="ticket-meta">
+    Date : <span x-text="new Date().toLocaleDateString('fr-FR')"></span>
+</div>
+                </div>
+
+                <div class="client-billing-box">
+                    <strong>Client :</strong><br>
+                    <span x-show="nom || prenom"><span x-text="genre"></span> <span x-text="prenom"></span> <span x-text="nom"></span><br></span>
+                    <span x-show="adresse"><span x-text="adresse"></span><br></span>
+                    <span x-show="tel">Tél : <span x-text="tel"></span><br></span>
+                    <span x-show="mail">E-mail : <span x-text="mail"></span></span>
+                    <span x-show="!nom && !prenom && !adresse && !tel && !mail" style="color: #9CA3AF; font-style: italic;">Saisir les coordonnées à gauche...</span>
+                </div>
+
+                <table class="ticket-table">
+                    <thead>
+                        <tr>
+                            <th>Prestation / Élément</th>
+                            <th style="text-align: right;">Montant H.T.</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr x-show="optionVisite === 'seule'">
+                            <td>Pré-visite Technique Certifiée (Forfait)</td>
+                            <td class="price">100,00 €</td>
+                        </tr>
+                        <tr x-show="optionVisite === 'pose_engagee'">
+                            <td>Pré-visite de conformité</td>
+                            <td class="price remise-texte">OFFERTE</td>
+                        </tr>
+                        <tr x-show="optionVisite === 'pose_engagee' && totalPoints > 0">
+                            <td>Forfait Déplacement (2 pts)</td>
+                            <td class="price">120,00 €</td>
+                        </tr>
+                        <tr x-show="optionVisite === 'pose_engagee' && pointsElements > 0">
+                            <td>Éléments configurés (<span x-text="pointsElements"></span> pts)</td>
+                            <td class="price" x-text="(pointsElements * 60).toFixed(2) + ' €'"></td>
+                        </tr>
+                        <tr x-show="optionVisite === 'pose_engagee' && totalPoints === 0">
+                            <td colspan="2" style="color: #9CA3AF; font-style: italic; text-align: center; padding: 10px 0;">
+                                Aucun élément sélectionné
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="totals-section">
+                    <div class="total-row">
+                        <span>Total Partiel H.T.</span>
+                        <span x-text="totalHT.toFixed(2) + ' €'"></span>
+                    </div>
+                    <div class="total-row" style="color: #6B7280;">
+                        <span>TVA (20%)</span>
+                        <span x-text="(totalHT * 0.20).toFixed(2) + ' €'"></span>
+                    </div>
+                    <div class="total-row total-main">
+                        <span>TOTAL T.T.C.</span>
+                        <span x-text="totalTTC.toFixed(2) + ' €'"></span>
+                    </div>
+                </div>
+
+                <div class="signature-container" x-show="estSigne">
+                    <div class="signature-title">✓ DOCUMENT SIGNÉ & CERTIFIÉ</div>
+                    <div style="font-size: 0.75rem; color: #047857;">
+                        Signé électroniquement le <span x-text="dateSignature"></span><br>
+                        Génération du reçu de paiement automatique.
+                    </div>
+                </div>
+
+                <button
+    type="button"
+    class="btn-signature"
+    x-show="!estSigne"
+    @click="signerDevis()">
+
+    ✍ Signer électroniquement ce devis
+
+</button>
+
+<a
+    href="facture.html"
+       class="btn-pdf"
+    style="text-decoration:none;"
+
+    @click="
+
+localStorage.setItem('typeDocument', estSigne ? 'facture' : 'devis');
+
+localStorage.setItem('clientNom', genre + ' ' + prenom + ' ' + nom);
+localStorage.setItem('clientAdresse', adresse);
+localStorage.setItem('clientTelephone', tel);
+localStorage.setItem('clientMail', mail);
+
+localStorage.setItem('totalHT', totalHT.toFixed(2));
+localStorage.setItem('tva', (totalHT * 0.20).toFixed(2));
+localStorage.setItem('totalTTC', totalTTC.toFixed(2));
+localStorage.setItem('points', totalPoints);
+
+localStorage.setItem(
+    'designation',
+    optionVisite === 'seule'
+        ? 'Pré-visite technique certifiée'
+        : 'Pose complète de cuisine'
+);
+
+let numeroDocument = '';
+const annee = new Date().getFullYear();
+
+if (estSigne) {
+
+    let compteur = parseInt(localStorage.getItem('compteurFacture') || '0');
+    compteur++;
+    localStorage.setItem('compteurFacture', compteur);
+
+    numeroDocument =
+        'FAC-' + annee + '-' + compteur.toString().padStart(6,'0');
+
+} else {
+
+    let compteur = parseInt(localStorage.getItem('compteurDevis') || '0');
+    compteur++;
+    localStorage.setItem('compteurDevis', compteur);
+
+    numeroDocument =
+        'DEV-' + annee + '-' + compteur.toString().padStart(6,'0');
+
+}
+
+localStorage.setItem('numeroDocument', numeroDocument);
+
+">
+
+    <span
+        x-text="estSigne ? 'Télécharger ma Facture (PDF)' : 'Télécharger mon Devis (PDF)'">
+    </span>
+
+</a>
+<button
+    type="button"
+    class="btn-signature"
+    style="background:#374151;margin-top:10px;"
+    x-show="estSigne"
+    @click="nouveauDevis()">
+
+    🆕 Nouveau devis
+
+</button>
+
+<div
+    x-show="estSigne"
+    style="
+        margin-top:25px;
+        background:linear-gradient(135deg,#1E3A8A,#0F172A);
+        color:white;
+        padding:25px;
+        border-radius:14px;
+        text-align:center;
+        box-shadow:0 12px 30px rgba(30,58,138,.20);
+    ">
+
+    <div style="font-size:24px;">✅</div>
+
+    <h3 style="margin:15px 0 10px;">
+        Votre chantier a été transmis automatiquement
+        à l'antenne LPC.
+    </h3>
+
+    <p style="color:#BFDBFE;">
+        Tous les documents, le devis signé et le paiement sécurisé
+        sont désormais disponibles dans l'espace du franchisé.
+    </p>
+
+    <a
+        href="transmission.html"
+        target="_blank"
+        class="btn-signature"
+        style="
+            display:inline-block;
+            width:auto;
+            margin-top:20px;
+            background:#10B981;
+            padding:15px 30px;
+            text-decoration:none;
+            font-size:17px;
+        ">
+        👷 Voir ce que reçoit immédiatement le franchisé
+    </a>
+
+</div>
+            </div>
+
+        </div>
+    </div>
+<section class="dashboard-preview">
+
+<h2>Votre futur espace franchisé</h2>
+
+<p class="dashboard-subtitle">
+
+Vous posez les cuisines.
+La plateforme gère tout le reste.
+
+</p>
+
+<div class="dashboard-grid">
+
+<div class="dashboard-card">
+
+<h3>📅 Planning</h3>
+
+<ul>
+
+<li>✔ Lundi : Schmidt</li>
+
+<li>✔ Mardi : Cuisineandcie</li>
+
+<li>✔ Mercredi : Ixina</li>
+
+<li>✔ Jeudi : Mobalpa</li>
+
+<li>🟢 Vendredi : Disponible</li>
+
+</ul>
+
+</div>
+
+<div class="dashboard-card">
+
+<h3>💶 Paiements</h3>
+
+<p style="font-size:38px;font-weight:bold;color:#10B981;">
+
+18 450 €
+
+</p>
+
+<p>
+
+Paiements en attente de validation
+
+</p>
+
+</div>
+
+<div class="dashboard-card">
+
+<h3>📄 Administration</h3>
+
+<ul>
+
+<li>✔ Devis automatiques</li>
+
+<li>✔ Factures générées</li>
+
+<li>✔ PV de chantier</li>
+
+<li>✔ Photos archivées</li>
+
+<li>✔ Relances clients</li>
+
+</ul>
+
+</div>
+
+<div class="dashboard-card">
+
+<h3>⭐ Satisfaction</h3>
+
+<p style="font-size:50px;color:#10B981;font-weight:bold;">
+
+4,98
+
+</p>
+
+<p>
+
+Note moyenne des clients
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+    <footer>
+        &copy; 2026 Les Poseurs Chrono. Tous droits réservés. Document de Référence Professionnel - Version Juillet 2026.
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,3557 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Espace Franchisé | Les Poseurs Chrono</title>
+
+<style>
+
+:root {
+    --blue-chrono: #1E3A8A;
+    --green-chrono: #10B981;
+    --dark-blue: #0F172A;
+    --light-bg: #F3F4F6;
+    --white: #FFFFFF;
+    --text: #1F2937;
+    --grey: #6B7280;
+    --border: #E5E7EB;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: var(--light-bg);
+    color: var(--text);
+}
+
+/* BARRE LATERALE */
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 250px;
+    height: 100vh;
+    background: linear-gradient(180deg, #1E3A8A 0%, #0F172A 100%);
+    color: white;
+    padding: 30px 20px;
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.logo span {
+    color: var(--green-chrono);
+}
+
+.antenne {
+    font-size: 13px;
+    color: #93C5FD;
+    margin-bottom: 40px;
+}
+
+.menu-item {
+    display: block;
+    padding: 13px 15px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    color: #DBEAFE;
+    text-decoration: none;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.menu-item:hover,
+.menu-item.active {
+    background: rgba(255,255,255,0.12);
+    color: white;
+}
+
+.zero-paperasse {
+    position: absolute;
+    bottom: 30px;
+    left: 20px;
+    right: 20px;
+    padding: 18px;
+    background: rgba(16,185,129,0.15);
+    border: 1px solid rgba(16,185,129,0.45);
+    border-radius: 12px;
+}
+
+.zero-paperasse strong {
+    color: #6EE7B7;
+    font-size: 16px;
+}
+
+.zero-paperasse p {
+    margin: 7px 0 0;
+    font-size: 12px;
+    color: #D1FAE5;
+    line-height: 1.5;
+}
+
+/* CONTENU */
+
+.main {
+    margin-left: 250px;
+    padding: 35px;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.welcome h1 {
+    margin: 0;
+    font-size: 29px;
+    color: var(--blue-chrono);
+}
+
+.welcome p {
+    margin: 7px 0 0;
+    color: var(--grey);
+}
+
+.profile {
+    background: white;
+    padding: 12px 18px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    font-weight: 700;
+    color: var(--blue-chrono);
+}
+
+/* ALERTE CHANTIER */
+
+.new-job {
+    background: linear-gradient(135deg, #1E3A8A, #172554);
+    color: white;
+    border-radius: 18px;
+    padding: 28px;
+    margin-bottom: 28px;
+    box-shadow: 0 18px 35px rgba(30,58,138,0.20);
+}
+
+.new-job-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.job-badge {
+    display: inline-block;
+    background: var(--green-chrono);
+    padding: 7px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.new-job h2 {
+    font-size: 25px;
+    margin: 18px 0 6px;
+}
+
+.new-job p {
+    color: #BFDBFE;
+    margin: 5px 0;
+}
+
+.job-value {
+    font-size: 35px;
+    font-weight: 800;
+    color: #6EE7B7;
+}
+
+.job-actions {
+    margin-top: 22px;
+    display: flex;
+    gap: 12px;
+}
+
+.btn-green,
+.btn-light {
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-weight: 800;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-green {
+    background: var(--green-chrono);
+    color: white;
+}
+
+.btn-light {
+    background: white;
+    color: var(--blue-chrono);
+}
+
+/* INDICATEURS */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 28px;
+}
+
+.stat-card {
+    background: white;
+    padding: 23px;
+    border-radius: 14px;
+    box-shadow: 0 7px 20px rgba(0,0,0,0.06);
+}
+
+.stat-label {
+    color: var(--grey);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.stat-value {
+    font-size: 29px;
+    font-weight: 800;
+    color: var(--blue-chrono);
+    margin-top: 9px;
+}
+
+.stat-green {
+    color: var(--green-chrono);
+}
+
+.stat-note {
+    margin-top: 7px;
+    color: var(--grey);
+    font-size: 12px;
+}
+
+/* GRILLE BASSE */
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: 22px;
+}
+
+.card {
+    background: white;
+    border-radius: 14px;
+    padding: 25px;
+    box-shadow: 0 7px 20px rgba(0,0,0,0.06);
+}
+
+.card h3 {
+    color: var(--blue-chrono);
+    margin-top: 0;
+    font-size: 18px;
+}
+
+.planning-row {
+    display: grid;
+    grid-template-columns: 90px 1fr 130px;
+    gap: 15px;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.day {
+    font-weight: 800;
+    color: var(--blue-chrono);
+}
+
+.client {
+    font-weight: 700;
+}
+
+.client span {
+    display: block;
+    color: var(--grey);
+    font-size: 12px;
+    font-weight: 400;
+    margin-top: 3px;
+}
+
+.status {
+    text-align: center;
+    padding: 6px 9px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.status-confirmed {
+    background: #D1FAE5;
+    color: #047857;
+}
+
+.status-progress {
+    background: #DBEAFE;
+    color: #1E40AF;
+}
+
+.status-free {
+    background: #F3F4F6;
+    color: #6B7280;
+}
+
+.notification {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.notification strong {
+    display: block;
+    color: var(--text);
+    font-size: 14px;
+}
+
+.notification span {
+    display: block;
+    color: var(--grey);
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.money-box {
+    margin-top: 22px;
+    padding: 18px;
+    border-radius: 12px;
+    background: #F0FDF4;
+    border: 1px solid #A7F3D0;
+}
+
+.money-box strong {
+    color: #047857;
+}
+
+.money-value {
+    font-size: 26px;
+    color: var(--green-chrono);
+    font-weight: 800;
+    margin-top: 6px;
+}
+
+/* FENETRE DOSSIER */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 500;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15,23,42,0.72);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    width: 90%;
+    max-width: 600px;
+    background: white;
+    border-radius: 18px;
+    padding: 30px;
+    box-shadow: 0 30px 70px rgba(0,0,0,0.30);
+}
+
+.modal-content h2 {
+    color: var(--blue-chrono);
+    margin-top: 0;
+}
+
+.dossier-line {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.dossier-line span:first-child {
+    color: var(--grey);
+}
+
+.dossier-line strong {
+    color: var(--text);
+    text-align: right;
+}
+
+.secure {
+    margin-top: 20px;
+    padding: 15px;
+    background: #F0FDF4;
+    border-left: 4px solid var(--green-chrono);
+    color: #047857;
+    font-weight: 700;
+}
+
+.close-btn {
+    margin-top: 22px;
+    width: 100%;
+    padding: 12px;
+    background: var(--blue-chrono);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1000px) {
+
+    .sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+    }
+
+    .zero-paperasse {
+        position: static;
+        margin-top: 20px;
+    }
+
+    .main {
+        margin-left: 0;
+    }
+
+    .stats {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<aside class="sidebar">
+
+    <div class="logo">
+        Les Poseurs <span>Chrono</span>
+    </div>
+
+    <div class="antenne">
+        Antenne Saint-Étienne · Secteur 42
+    </div>
+
+    <a class="menu-item active">🏠 Tableau de bord</a>
+
+    <a class="menu-item" onclick="showPlanning()">📅 Mon planning</a>
+
+<a class="menu-item" onclick="showDisponibilites()">🗓️ Mes disponibilités</a>
+
+    <a class="menu-item" onclick="showChantiers()">🧰 Mes chantiers</a>
+
+    <a class="menu-item" onclick="showDocuments()">📄 Mes documents</a>
+
+   <a class="menu-item" onclick="showPaiements()">💶 Mes paiements</a>
+
+<a class="menu-item" onclick="showPartenaires()">🤝 Mes partenaires</a>
+
+<a class="menu-item" onclick="showQualite()">⭐ Qualité réseau</a>    <div class="zero-paperasse">
+
+        <strong>⚡ ZÉRO PAPERASSE</strong>
+
+        <p>
+            Devis, factures, paiements et documents :
+            la plateforme gère votre administratif.
+        </p>
+
+    </div>
+
+</aside>
+
+<main class="main">
+
+    <div class="topbar">
+
+        <div class="welcome">
+
+            <h1>Bonjour Thomas 👋</h1>
+
+            <p>Voici l'activité de votre antenne Les Poseurs Chrono.</p>
+
+        </div>
+
+        <div class="profile">
+            🔧 Franchisé Expert · Saint-Étienne
+        </div>
+
+    </div>
+
+    <section class="new-job">
+
+        <div class="new-job-top">
+
+            <span class="job-badge">
+                🔔 NOUVEAU CHANTIER CONFIRMÉ
+            </span>
+
+            <div class="job-value">
+                <span id="jobMontantHT">—</span>
+            </div>
+
+        </div>
+
+        <h2>Cuisineandcie · Saint-Étienne</h2>
+
+        <p>
+    Client : <span id="jobClient">—</span>
+</p>
+
+        <p>Pose prévue : Mardi 18 août · 08h00</p>
+
+       <p>Durée estimée : <strong id="jobDuree"></strong></p>
+
+        <div class="job-actions">
+
+            <button class="btn-green" onclick="openDossier()">
+                Voir le dossier chantier
+            </button>
+
+            <button class="btn-light" onclick="confirmJob(this)">
+                ✓ Confirmer la prise en charge
+            </button>
+
+        </div>
+
+    </section>
+
+    <section class="stats">
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                CHIFFRE D'AFFAIRES DU MOIS
+            </div>
+
+            <div class="stat-value">
+                18 450 €
+            </div>
+
+            <div class="stat-note">
+                14 chantiers réalisés
+            </div>
+
+        </div>
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                PAIEMENTS SÉCURISÉS
+            </div>
+
+            <div class="stat-value stat-green">
+                5
+            </div>
+
+            <div class="stat-note">
+                Fonds sécurisés sur la plateforme
+            </div>
+
+        </div>
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                FACTURES GÉNÉRÉES
+            </div>
+
+            <div class="stat-value">
+                12
+            </div>
+
+            <div class="stat-note">
+                Envoyées automatiquement
+            </div>
+
+        </div>
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                NOTE QUALITÉ
+            </div>
+
+            <div class="stat-value stat-green">
+                4,98 / 5
+            </div>
+
+            <div class="stat-note">
+                Standard réseau Chrono
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="dashboard-grid">
+
+        <div class="card">
+
+            <h3>📅 Mon planning de la semaine</h3>
+
+            <div class="planning-row">
+
+                <div class="day">LUNDI</div>
+
+                <div class="client">
+                    Schmidt
+                    <span>M. Dupont · Firminy</span>
+                </div>
+
+                <div class="status status-progress">
+                    EN COURS
+                </div>
+
+            </div>
+
+            <div class="planning-row">
+
+                <div class="day">MARDI</div>
+
+                <div class="client">
+                    Cuisineandcie
+                    <span>M. & Mme Martin · Saint-Étienne</span>
+                </div>
+
+                <div class="status status-confirmed">
+                    CONFIRMÉ
+                </div>
+
+            </div>
+
+            <div class="planning-row">
+
+                <div class="day">MERCREDI</div>
+
+                <div class="client">
+                    Cuisineandcie
+                    <span>Suite chantier Martin</span>
+                </div>
+
+                <div class="status status-confirmed">
+                    CONFIRMÉ
+                </div>
+
+            </div>
+
+            <div class="planning-row">
+
+                <div class="day">JEUDI</div>
+
+                <div class="client">
+                    Mobalpa
+                    <span>Mme Bernard · Roche-la-Molière</span>
+                </div>
+
+                <div class="status status-confirmed">
+                    CONFIRMÉ
+                </div>
+
+            </div>
+
+            <div class="planning-row">
+
+                <div class="day">VENDREDI</div>
+
+                <div class="client">
+                    Créneau disponible
+                    <span>Ouvert à la réservation</span>
+                </div>
+
+                <div class="status status-free">
+                    DISPONIBLE
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <h3>🔔 Centre de notifications</h3>
+
+            <div class="notification">
+
+                <strong>3 devis signés</strong>
+
+                <span>Documents archivés automatiquement</span>
+
+            </div>
+
+            <div class="notification">
+
+                <strong>2 factures envoyées</strong>
+
+                <span>Aucune action nécessaire</span>
+
+            </div>
+
+            <div class="notification">
+
+                <strong>1 PV de chantier à finaliser</strong>
+
+                <span>Chantier Dupont · Firminy</span>
+
+            </div>
+
+            <div class="notification">
+
+                <strong>5 paiements sécurisés</strong>
+
+                <span>En attente de validation des fins de chantier</span>
+
+            </div>
+
+            <div class="money-box">
+
+                <strong>Prochain virement estimé</strong>
+
+                <div class="money-value">
+                    4 287,30 €
+                </div>
+
+                <div class="stat-note">
+                    Redevance réseau déjà calculée
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+<div class="modal" id="dossierModal">
+
+    <div class="modal-content">
+
+        <h2>Dossier chantier #LPC-2026-08972</h2>
+
+        <div class="dossier-line">
+            <span>Donneur d'ordre</span>
+            <strong>Cuisineandcie Saint-Étienne</strong>
+        </div>
+
+       <div class="dossier-line">
+    <span>Client final</span>
+    <strong id="dossierClient">—</strong>
+</div>
+
+        <div class="dossier-line">
+    <span>Date du chantier</span>
+    <strong id="dossierDate">—</strong>
+</div>
+        <div class="dossier-line">
+    <span>Durée estimée</span>
+    <strong id="dossierDuree">—</strong>
+</div>
+        <div class="dossier-line">
+    <span>Montant chantier</span>
+    <strong id="dossierMontant">—</strong>
+</div>
+        <div class="dossier-line">
+            <span>Contrat client</span>
+            <strong>✓ Signé électroniquement</strong>
+        </div>
+
+        <div class="dossier-line">
+            <span>Plan technique</span>
+            <strong>✓ Disponible PDF</strong>
+        </div>
+
+        <div class="dossier-line">
+            <span>Paiement client</span>
+            <strong>✓ Fonds sécurisés</strong>
+        </div>
+
+        <div class="secure">
+            🛡️ Rémunération garantie après validation du PV de fin de chantier.
+        </div>
+
+        <button class="close-btn" onclick="closeDossier()">
+            Fermer le dossier
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+function showDisponibilites() {
+
+    const main = document.querySelector('.main');
+
+    main.innerHTML = `
+
+    <div class="topbar">
+
+        <div class="welcome">
+            <h1>🗓️ Mes disponibilités</h1>
+            <p>Vous gardez la main sur les créneaux ouverts à la réservation.</p>
+        </div>
+
+        <button class="btn-light" onclick="location.reload()">
+            ← Retour au tableau de bord
+        </button>
+
+    </div>
+
+    <section style="
+        background:linear-gradient(135deg,#1E3A8A,#0F172A);
+        color:white;
+        padding:30px;
+        border-radius:18px;
+        margin-bottom:25px;
+        box-shadow:0 18px 35px rgba(30,58,138,0.20);
+    ">
+
+        <div style="
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            gap:30px;
+        ">
+
+            <div>
+
+                <div style="
+                    display:inline-block;
+                    background:#10B981;
+                    padding:7px 13px;
+                    border-radius:20px;
+                    font-size:12px;
+                    font-weight:800;
+                    margin-bottom:15px;
+                ">
+                    📅 VOUS GARDEZ LA MAIN
+                </div>
+
+                <h2 style="
+                    font-size:28px;
+                    margin:0 0 10px;
+                ">
+                    Ouvrez uniquement les créneaux que vous souhaitez.
+                </h2>
+
+                <p style="
+                    color:#BFDBFE;
+                    margin:0;
+                    line-height:1.7;
+                ">
+                    Les partenaires peuvent réserver uniquement
+                    les journées que vous avez rendues disponibles.
+                    Vos autres chantiers restent confidentiels.
+                </p>
+
+            </div>
+
+            <div style="font-size:60px;">
+                🗓️
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="stats">
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                CRÉNEAUX OUVERTS
+            </div>
+
+            <div
+                class="stat-value stat-green"
+                id="available-count"
+            >
+                3
+            </div>
+
+            <div class="stat-note">
+                Sur les 5 prochains jours
+            </div>
+
+        </div>
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                JOURS INDISPONIBLES
+            </div>
+
+            <div
+                class="stat-value"
+                id="closed-count"
+            >
+                2
+            </div>
+
+            <div class="stat-note">
+                Non visibles à la réservation
+            </div>
+
+        </div>
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                ZONE D'INTERVENTION
+            </div>
+
+            <div class="stat-value">
+                65 KM
+            </div>
+
+            <div class="stat-note">
+                Antenne Saint-Étienne
+            </div>
+
+        </div>
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                PROCHAINE DISPONIBILITÉ
+            </div>
+
+            <div
+                class="stat-value stat-green"
+                id="next-availability"
+            >
+                24 AOÛT
+            </div>
+
+            <div class="stat-note">
+                Visible par les partenaires
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="card">
+
+        <h3>📅 Gérer mes prochains créneaux</h3>
+
+        <p style="
+            color:#6B7280;
+            line-height:1.7;
+        ">
+            Cliquez sur un créneau pour modifier sa disponibilité.
+            La mise à jour est simulée instantanément dans cette démonstration.
+        </p>
+
+        <div
+            class="availability-row"
+            data-date="24 AOÛT"
+            data-open="true"
+            style="
+                display:grid;
+                grid-template-columns:180px 1fr 180px;
+                align-items:center;
+                gap:20px;
+                padding:18px 0;
+                border-bottom:1px solid #E5E7EB;
+            "
+        >
+
+            <div>
+                <strong>LUNDI 24 AOÛT</strong>
+                <div style="font-size:12px;color:#6B7280;">
+                    Journée complète
+                </div>
+            </div>
+
+            <div class="availability-status">
+                <strong style="color:#047857;">
+                    ● DISPONIBLE
+                </strong>
+
+                <div style="
+                    font-size:12px;
+                    color:#6B7280;
+                    margin-top:4px;
+                ">
+                    Visible à la réservation
+                </div>
+            </div>
+
+            <button
+                class="btn-green availability-button"
+                onclick="toggleAvailability(this)"
+                style="padding:10px;"
+            >
+                Fermer le créneau
+            </button>
+
+        </div>
+
+        <div
+            class="availability-row"
+            data-date="25 AOÛT"
+            data-open="false"
+            style="
+                display:grid;
+                grid-template-columns:180px 1fr 180px;
+                align-items:center;
+                gap:20px;
+                padding:18px 0;
+                border-bottom:1px solid #E5E7EB;
+            "
+        >
+
+            <div>
+                <strong>MARDI 25 AOÛT</strong>
+                <div style="font-size:12px;color:#6B7280;">
+                    Journée complète
+                </div>
+            </div>
+
+            <div class="availability-status">
+                <strong style="color:#DC2626;">
+                    ● INDISPONIBLE
+                </strong>
+
+                <div style="
+                    font-size:12px;
+                    color:#6B7280;
+                    margin-top:4px;
+                ">
+                    Masqué aux partenaires
+                </div>
+            </div>
+
+            <button
+                class="availability-button"
+                onclick="toggleAvailability(this)"
+                style="
+                    padding:10px;
+                    border:none;
+                    border-radius:8px;
+                    background:#EFF6FF;
+                    color:#1E3A8A;
+                    font-weight:800;
+                    cursor:pointer;
+                "
+            >
+                Ouvrir le créneau
+            </button>
+
+        </div>
+
+        <div
+            class="availability-row"
+            data-date="26 AOÛT"
+            data-open="true"
+            style="
+                display:grid;
+                grid-template-columns:180px 1fr 180px;
+                align-items:center;
+                gap:20px;
+                padding:18px 0;
+                border-bottom:1px solid #E5E7EB;
+            "
+        >
+
+            <div>
+                <strong>MERCREDI 26 AOÛT</strong>
+                <div style="font-size:12px;color:#6B7280;">
+                    Journée complète
+                </div>
+            </div>
+
+            <div class="availability-status">
+                <strong style="color:#047857;">
+                    ● DISPONIBLE
+                </strong>
+
+                <div style="
+                    font-size:12px;
+                    color:#6B7280;
+                    margin-top:4px;
+                ">
+                    Visible à la réservation
+                </div>
+            </div>
+
+            <button
+                class="btn-green availability-button"
+                onclick="toggleAvailability(this)"
+                style="padding:10px;"
+            >
+                Fermer le créneau
+            </button>
+
+        </div>
+
+        <div
+            class="availability-row"
+            data-date="27 AOÛT"
+            data-open="false"
+            style="
+                display:grid;
+                grid-template-columns:180px 1fr 180px;
+                align-items:center;
+                gap:20px;
+                padding:18px 0;
+                border-bottom:1px solid #E5E7EB;
+            "
+        >
+
+            <div>
+                <strong>JEUDI 27 AOÛT</strong>
+                <div style="font-size:12px;color:#6B7280;">
+                    Journée complète
+                </div>
+            </div>
+
+            <div class="availability-status">
+                <strong style="color:#DC2626;">
+                    ● INDISPONIBLE
+                </strong>
+
+                <div style="
+                    font-size:12px;
+                    color:#6B7280;
+                    margin-top:4px;
+                ">
+                    Masqué aux partenaires
+                </div>
+            </div>
+
+            <button
+                class="availability-button"
+                onclick="toggleAvailability(this)"
+                style="
+                    padding:10px;
+                    border:none;
+                    border-radius:8px;
+                    background:#EFF6FF;
+                    color:#1E3A8A;
+                    font-weight:800;
+                    cursor:pointer;
+                "
+            >
+                Ouvrir le créneau
+            </button>
+
+        </div>
+
+        <div
+            class="availability-row"
+            data-date="28 AOÛT"
+            data-open="true"
+            style="
+                display:grid;
+                grid-template-columns:180px 1fr 180px;
+                align-items:center;
+                gap:20px;
+                padding:18px 0;
+            "
+        >
+
+            <div>
+                <strong>VENDREDI 28 AOÛT</strong>
+                <div style="font-size:12px;color:#6B7280;">
+                    Journée complète
+                </div>
+            </div>
+
+            <div class="availability-status">
+                <strong style="color:#047857;">
+                    ● DISPONIBLE
+                </strong>
+
+                <div style="
+                    font-size:12px;
+                    color:#6B7280;
+                    margin-top:4px;
+                ">
+                    Visible à la réservation
+                </div>
+            </div>
+
+            <button
+                class="btn-green availability-button"
+                onclick="toggleAvailability(this)"
+                style="padding:10px;"
+            >
+                Fermer le créneau
+            </button>
+
+        </div>
+
+    </section>
+
+    <section class="card" style="margin-top:22px;">
+
+        <h3>🔒 Votre planning reste confidentiel</h3>
+
+        <p style="
+            color:#6B7280;
+            line-height:1.7;
+        ">
+            Un partenaire ne visualise jamais le nom de vos autres clients
+            ni l'origine de vos autres chantiers.
+        </p>
+
+        <div class="secure">
+            👁️ Le partenaire voit uniquement :
+            DISPONIBLE ou INDISPONIBLE.
+            Le contenu de votre planning reste privé.
+        </div>
+
+    </section>
+
+    `;
+
+}
+
+
+function toggleAvailability(button) {
+
+    const row = button.closest('.availability-row');
+
+    const status = row.querySelector('.availability-status');
+
+    const isOpen = row.dataset.open === 'true';
+
+    if (isOpen) {
+
+        row.dataset.open = 'false';
+
+        status.innerHTML = `
+
+            <strong style="color:#DC2626;">
+                ● INDISPONIBLE
+            </strong>
+
+            <div style="
+                font-size:12px;
+                color:#6B7280;
+                margin-top:4px;
+            ">
+                Masqué aux partenaires
+            </div>
+
+        `;
+
+        button.innerHTML = 'Ouvrir le créneau';
+
+        button.className = 'availability-button';
+
+        button.style.background = '#EFF6FF';
+
+        button.style.color = '#1E3A8A';
+
+        button.style.border = 'none';
+
+        button.style.borderRadius = '8px';
+
+        button.style.fontWeight = '800';
+
+        button.style.cursor = 'pointer';
+
+    } else {
+
+        row.dataset.open = 'true';
+
+        status.innerHTML = `
+
+            <strong style="color:#047857;">
+                ● DISPONIBLE
+            </strong>
+
+            <div style="
+                font-size:12px;
+                color:#6B7280;
+                margin-top:4px;
+            ">
+                Visible à la réservation
+            </div>
+
+        `;
+
+        button.innerHTML = 'Fermer le créneau';
+
+        button.className = 'btn-green availability-button';
+
+        button.style.background = '';
+
+        button.style.color = '';
+
+        button.style.border = '';
+
+        button.style.borderRadius = '';
+
+        button.style.fontWeight = '';
+
+        button.style.cursor = 'pointer';
+
+    }
+
+    updateAvailabilityStats();
+
+}
+
+
+function updateAvailabilityStats() {
+
+    const rows = document.querySelectorAll('.availability-row');
+
+    let openCount = 0;
+
+    let firstOpenDate = null;
+
+    rows.forEach(row => {
+
+        if (row.dataset.open === 'true') {
+
+            openCount++;
+
+            if (!firstOpenDate) {
+
+                firstOpenDate = row.dataset.date;
+
+            }
+
+        }
+
+    });
+
+    const closedCount = rows.length - openCount;
+
+    document.getElementById('available-count').innerText = openCount;
+
+    document.getElementById('closed-count').innerText = closedCount;
+
+    document.getElementById('next-availability').innerText =
+        firstOpenDate ? firstOpenDate : 'AUCUNE';
+
+}
+
+function showPlanning() {
+
+    const main = document.querySelector('.main');
+
+    main.innerHTML = `
+    
+    <div class="topbar">
+
+        <div class="welcome">
+            <h1>📅 Mon planning</h1>
+            <p>Votre planning chantier Les Poseurs Chrono.</p>
+        </div>
+
+        <button class="btn-light" onclick="location.reload()">
+            ← Retour au tableau de bord
+        </button>
+
+    </div>
+
+    <section class="card">
+
+        <h3>Semaine du 17 au 21 août 2026</h3>
+
+        <div class="planning-row">
+
+            <div class="day">LUNDI 17</div>
+
+            <div class="client">
+                Schmidt
+                <span>M. Dupont · Firminy · 08h00</span>
+            </div>
+
+            <div class="status status-progress">
+                EN COURS
+            </div>
+
+        </div>
+
+        <div class="planning-row">
+
+            <div class="day">MARDI 18</div>
+
+            <div class="client">
+                Cuisineandcie
+                <span>M. & Mme Martin · Saint-Étienne · 08h00</span>
+            </div>
+
+            <div class="status status-confirmed">
+                CONFIRMÉ
+            </div>
+
+        </div>
+
+        <div class="planning-row">
+
+            <div class="day">MERCREDI 19</div>
+
+            <div class="client">
+                Cuisineandcie
+                <span>Suite chantier Martin · jusqu'à 12h00</span>
+            </div>
+
+            <div class="status status-confirmed">
+                CONFIRMÉ
+            </div>
+
+        </div>
+
+        <div class="planning-row">
+
+            <div class="day">JEUDI 20</div>
+
+            <div class="client">
+                Mobalpa
+                <span>Mme Bernard · Roche-la-Molière · 08h00</span>
+            </div>
+
+            <div class="status status-confirmed">
+                CONFIRMÉ
+            </div>
+
+        </div>
+
+        <div class="planning-row">
+
+            <div class="day">VENDREDI 21</div>
+
+            <div class="client">
+                Créneau ouvert
+                <span>Disponible à la réservation par un partenaire</span>
+            </div>
+
+            <div class="status status-free">
+                DISPONIBLE
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="card" style="margin-top:22px;">
+
+        <h3>⚡ Fonctionnement du planning Chrono</h3>
+
+        <p style="color:#6B7280;line-height:1.7;">
+            Les chantiers confirmés et signés sont intégrés au planning.
+            Les partenaires voient uniquement vos créneaux disponibles ou indisponibles.
+            Les informations concernant vos autres clients restent confidentielles.
+        </p>
+
+        <div class="secure">
+            🔒 Un cuisiniste ne voit jamais le détail de vos autres chantiers.
+            Il peut uniquement réserver un créneau disponible.
+        </div>
+
+    </section>
+
+       `;
+
+}
+
+function showQualite() {
+
+    const main = document.querySelector('.main');
+
+    main.innerHTML = `
+
+    <div class="topbar">
+
+        <div class="welcome">
+            <h1>⭐ Qualité réseau</h1>
+            <p>Suivez vos indicateurs qualité et la satisfaction de vos clients.</p>
+        </div>
+
+        <button class="btn-light" onclick="location.reload()">
+            ← Retour au tableau de bord
+        </button>
+
+    </div>
+
+    <section style="
+        background:linear-gradient(135deg,#1E3A8A,#0F172A);
+        color:white;
+        padding:30px;
+        border-radius:18px;
+        margin-bottom:25px;
+        box-shadow:0 18px 35px rgba(30,58,138,0.20);
+    ">
+
+        <div style="
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            gap:30px;
+        ">
+
+            <div>
+
+                <div style="
+                    display:inline-block;
+                    background:#10B981;
+                    padding:7px 13px;
+                    border-radius:20px;
+                    font-size:12px;
+                    font-weight:800;
+                    margin-bottom:15px;
+                ">
+                    ⭐ EXCELLENCE CHRONO
+                </div>
+
+                <h2 style="
+                    font-size:28px;
+                    margin:0 0 10px;
+                ">
+                    Votre qualité construit votre activité.
+                </h2>
+
+                <p style="
+                    color:#BFDBFE;
+                    margin:0;
+                    line-height:1.7;
+                ">
+                    La qualité de vos poses, votre ponctualité
+                    et la satisfaction de vos clients renforcent
+                    votre profil au sein du réseau.
+                </p>
+
+            </div>
+
+            <div style="
+                text-align:center;
+                min-width:180px;
+            ">
+
+                <div style="
+                    font-size:48px;
+                    font-weight:900;
+                    color:#FFFFFF;
+                ">
+                    4,98/5
+                </div>
+
+                <div style="
+                    color:#FCD34D;
+                    font-size:25px;
+                    letter-spacing:3px;
+                ">
+                    ★★★★★
+                </div>
+
+                <div style="
+                    color:#BFDBFE;
+                    font-size:12px;
+                    margin-top:5px;
+                ">
+                    Note qualité réseau
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="stats">
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                CHANTIERS VALIDÉS
+            </div>
+
+            <div class="stat-value">
+                14
+            </div>
+
+            <div class="stat-note">
+                Sur la période
+            </div>
+
+        </div>
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                PV SIGNÉS
+            </div>
+
+            <div class="stat-value stat-green">
+                100 %
+            </div>
+
+            <div class="stat-note">
+                Dossiers finalisés
+            </div>
+
+        </div>
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                SATISFACTION CLIENT
+            </div>
+
+            <div class="stat-value">
+                98 %
+            </div>
+
+            <div class="stat-note">
+                Avis positifs
+            </div>
+
+        </div>
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                LITIGES OUVERTS
+            </div>
+
+            <div class="stat-value stat-green">
+                0
+            </div>
+
+            <div class="stat-note">
+                Aucun dossier en cours
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="card">
+
+        <h3>📊 Mes indicateurs qualité</h3>
+
+        <div style="
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:20px;
+            margin-top:25px;
+        ">
+
+            <div style="
+                background:#EFF6FF;
+                padding:25px;
+                border-radius:14px;
+            ">
+
+                <div style="
+                    display:flex;
+                    justify-content:space-between;
+                    align-items:center;
+                    margin-bottom:15px;
+                ">
+
+                    <strong>
+                        ⏱️ Ponctualité
+                    </strong>
+
+                    <strong style="
+                        color:#1E3A8A;
+                        font-size:22px;
+                    ">
+                        100 %
+                    </strong>
+
+                </div>
+
+                <div style="
+                    height:10px;
+                    background:#DBEAFE;
+                    border-radius:20px;
+                    overflow:hidden;
+                ">
+
+                    <div style="
+                        width:100%;
+                        height:100%;
+                        background:#1E3A8A;
+                    "></div>
+
+                </div>
+
+                <p style="
+                    color:#6B7280;
+                    font-size:12px;
+                    margin-bottom:0;
+                ">
+                    Chantiers démarrés dans le créneau prévu.
+                </p>
+
+            </div>
+
+            <div style="
+                background:#F0FDF4;
+                padding:25px;
+                border-radius:14px;
+            ">
+
+                <div style="
+                    display:flex;
+                    justify-content:space-between;
+                    align-items:center;
+                    margin-bottom:15px;
+                ">
+
+                    <strong>
+                        🔧 Conformité de pose
+                    </strong>
+
+                    <strong style="
+                        color:#047857;
+                        font-size:22px;
+                    ">
+                        99 %
+                    </strong>
+
+                </div>
+
+                <div style="
+                    height:10px;
+                    background:#D1FAE5;
+                    border-radius:20px;
+                    overflow:hidden;
+                ">
+
+                    <div style="
+                        width:99%;
+                        height:100%;
+                        background:#10B981;
+                    "></div>
+
+                </div>
+
+                <p style="
+                    color:#6B7280;
+                    font-size:12px;
+                    margin-bottom:0;
+                ">
+                    Validation des PV et contrôles chantier.
+                </p>
+
+            </div>
+
+            <div style="
+                background:#FFFBEB;
+                padding:25px;
+                border-radius:14px;
+            ">
+
+                <div style="
+                    display:flex;
+                    justify-content:space-between;
+                    align-items:center;
+                    margin-bottom:15px;
+                ">
+
+                    <strong>
+                        ⭐ Satisfaction client
+                    </strong>
+
+                    <strong style="
+                        color:#B45309;
+                        font-size:22px;
+                    ">
+                        98 %
+                    </strong>
+
+                </div>
+
+                <div style="
+                    height:10px;
+                    background:#FEF3C7;
+                    border-radius:20px;
+                    overflow:hidden;
+                ">
+
+                    <div style="
+                        width:98%;
+                        height:100%;
+                        background:#F59E0B;
+                    "></div>
+
+                </div>
+
+                <p style="
+                    color:#6B7280;
+                    font-size:12px;
+                    margin-bottom:0;
+                ">
+                    Évaluations laissées après la fin du chantier.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="card" style="margin-top:22px;">
+
+        <h3>💬 Derniers avis clients</h3>
+
+        <div style="
+            border-left:4px solid #10B981;
+            background:#F9FAFB;
+            padding:18px 20px;
+            border-radius:0 10px 10px 0;
+            margin-top:20px;
+        ">
+
+            <div style="
+                color:#F59E0B;
+                font-size:18px;
+            ">
+                ★★★★★
+            </div>
+
+            <p style="
+                color:#374151;
+                line-height:1.6;
+            ">
+                « Pose très professionnelle, chantier propre
+                et cuisine parfaitement installée. »
+            </p>
+
+            <strong>
+                Mme Robert · Saint-Chamond
+            </strong>
+
+        </div>
+
+        <div style="
+            border-left:4px solid #10B981;
+            background:#F9FAFB;
+            padding:18px 20px;
+            border-radius:0 10px 10px 0;
+            margin-top:15px;
+        ">
+
+            <div style="
+                color:#F59E0B;
+                font-size:18px;
+            ">
+                ★★★★★
+            </div>
+
+            <p style="
+                color:#374151;
+                line-height:1.6;
+            ">
+                « Poseur ponctuel et très soigneux.
+                Toutes les explications étaient claires. »
+            </p>
+
+            <strong>
+                M. Leroy · Firminy
+            </strong>
+
+        </div>
+
+    </section>
+
+    <section class="card" style="margin-top:22px;">
+
+        <h3>🛡️ La qualité protège tout le réseau</h3>
+
+        <p style="
+            color:#6B7280;
+            line-height:1.7;
+        ">
+            Les indicateurs qualité permettent de suivre l'expérience client
+            et d'identifier rapidement les dossiers nécessitant une attention particulière.
+        </p>
+
+        <div class="secure">
+            ⭐ Un niveau de qualité régulier renforce la confiance des partenaires
+            et la réputation de l'antenne Les Poseurs Chrono.
+        </div>
+
+    </section>
+
+    `;
+
+}
+
+function showPartenaires() {
+
+    const main = document.querySelector('.main');
+
+    main.innerHTML = `
+
+    <div class="topbar">
+
+        <div class="welcome">
+            <h1>🤝 Mes partenaires</h1>
+            <p>Visualisez l'activité générée par votre réseau local.</p>
+        </div>
+
+        <button class="btn-light" onclick="location.reload()">
+            ← Retour au tableau de bord
+        </button>
+
+    </div>
+
+    <section style="
+        background:linear-gradient(135deg,#1E3A8A,#0F172A);
+        color:white;
+        padding:30px;
+        border-radius:18px;
+        margin-bottom:25px;
+        box-shadow:0 18px 35px rgba(30,58,138,0.20);
+    ">
+
+        <div style="
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            gap:30px;
+        ">
+
+            <div>
+
+                <div style="
+                    display:inline-block;
+                    background:#10B981;
+                    padding:7px 13px;
+                    border-radius:20px;
+                    font-size:12px;
+                    font-weight:800;
+                    margin-bottom:15px;
+                ">
+                    🚀 BOOSTEZ VOTRE CHIFFRE D'AFFAIRES
+                </div>
+
+                <h2 style="
+                    font-size:28px;
+                    margin:0 0 10px;
+                ">
+                    Vous ne prospectez plus seul.
+                </h2>
+
+                <p style="
+                    color:#BFDBFE;
+                    margin:0;
+                    line-height:1.7;
+                ">
+                    Les partenaires du réseau alimentent votre planning
+                    en fonction de votre zone et de vos disponibilités.
+                </p>
+
+            </div>
+
+            <div style="font-size:60px;">
+                🤝
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="stats">
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                PARTENAIRES ACTIFS
+            </div>
+
+            <div class="stat-value">
+                12
+            </div>
+
+            <div class="stat-note">
+                Sur votre zone
+            </div>
+
+        </div>
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                CHANTIERS APPORTÉS
+            </div>
+
+            <div class="stat-value stat-green">
+                18
+            </div>
+
+            <div class="stat-note">
+                Ce mois-ci
+            </div>
+
+        </div>
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                CA GÉNÉRÉ
+            </div>
+
+            <div class="stat-value">
+                18 450 €
+            </div>
+
+            <div class="stat-note">
+                Via le réseau
+            </div>
+
+        </div>
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                ZONE COUVERTE
+            </div>
+
+            <div class="stat-value stat-green">
+                65 KM
+            </div>
+
+            <div class="stat-note">
+                Antenne Saint-Étienne
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="card">
+
+        <h3>🤝 Mes principaux partenaires</h3>
+
+        <div style="
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:20px;
+            margin-top:22px;
+        ">
+
+            <div style="
+                border:1px solid #E5E7EB;
+                border-radius:14px;
+                padding:22px;
+                background:#FFFFFF;
+            ">
+
+                <div style="
+                    display:flex;
+                    justify-content:space-between;
+                    align-items:center;
+                    margin-bottom:18px;
+                ">
+
+                    <div>
+                        <strong style="font-size:18px;">
+                            Cuisineandcie
+                        </strong>
+
+                        <div style="
+                            color:#6B7280;
+                            font-size:12px;
+                            margin-top:4px;
+                        ">
+                            Partenaire actif
+                        </div>
+                    </div>
+
+                    <div style="
+                        background:#D1FAE5;
+                        color:#047857;
+                        padding:6px 10px;
+                        border-radius:20px;
+                        font-size:11px;
+                        font-weight:800;
+                    ">
+                        ACTIF
+                    </div>
+
+                </div>
+
+                <div class="dossier-line">
+                    <span>Chantiers ce mois</span>
+                    <strong>7</strong>
+                </div>
+
+                <div class="dossier-line">
+                    <span>CA généré</span>
+                    <strong>7 850 €</strong>
+                </div>
+
+                <div class="dossier-line">
+                    <span>Prochain chantier</span>
+                    <strong>18 août</strong>
+                </div>
+
+            </div>
+
+            <div style="
+                border:1px solid #E5E7EB;
+                border-radius:14px;
+                padding:22px;
+                background:#FFFFFF;
+            ">
+
+                <div style="
+                    display:flex;
+                    justify-content:space-between;
+                    align-items:center;
+                    margin-bottom:18px;
+                ">
+
+                    <div>
+                        <strong style="font-size:18px;">
+                            Schmidt
+                        </strong>
+
+                        <div style="
+                            color:#6B7280;
+                            font-size:12px;
+                            margin-top:4px;
+                        ">
+                            Partenaire actif
+                        </div>
+                    </div>
+
+                    <div style="
+                        background:#D1FAE5;
+                        color:#047857;
+                        padding:6px 10px;
+                        border-radius:20px;
+                        font-size:11px;
+                        font-weight:800;
+                    ">
+                        ACTIF
+                    </div>
+
+                </div>
+
+                <div class="dossier-line">
+                    <span>Chantiers ce mois</span>
+                    <strong>6</strong>
+                </div>
+
+                <div class="dossier-line">
+                    <span>CA généré</span>
+                    <strong>6 400 €</strong>
+                </div>
+
+                <div class="dossier-line">
+                    <span>Prochain chantier</span>
+                    <strong>17 août</strong>
+                </div>
+
+            </div>
+
+            <div style="
+                border:1px solid #E5E7EB;
+                border-radius:14px;
+                padding:22px;
+                background:#FFFFFF;
+            ">
+
+                <div style="
+                    display:flex;
+                    justify-content:space-between;
+                    align-items:center;
+                    margin-bottom:18px;
+                ">
+
+                    <div>
+                        <strong style="font-size:18px;">
+                            Mobalpa
+                        </strong>
+
+                        <div style="
+                            color:#6B7280;
+                            font-size:12px;
+                            margin-top:4px;
+                        ">
+                            Partenaire actif
+                        </div>
+                    </div>
+
+                    <div style="
+                        background:#D1FAE5;
+                        color:#047857;
+                        padding:6px 10px;
+                        border-radius:20px;
+                        font-size:11px;
+                        font-weight:800;
+                    ">
+                        ACTIF
+                    </div>
+
+                </div>
+
+                <div class="dossier-line">
+                    <span>Chantiers ce mois</span>
+                    <strong>5</strong>
+                </div>
+
+                <div class="dossier-line">
+                    <span>CA généré</span>
+                    <strong>4 200 €</strong>
+                </div>
+
+                <div class="dossier-line">
+                    <span>Prochain chantier</span>
+                    <strong>20 août</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="card" style="margin-top:22px;">
+
+        <h3>⚡ Comment le réseau alimente votre planning</h3>
+
+        <div style="
+            display:grid;
+            grid-template-columns:repeat(4,1fr);
+            gap:18px;
+            text-align:center;
+            margin-top:25px;
+        ">
+
+            <div style="
+                background:#EFF6FF;
+                padding:22px;
+                border-radius:12px;
+            ">
+
+                <div style="font-size:35px;">🏪</div>
+
+                <strong>Projet partenaire</strong>
+
+                <p style="
+                    color:#6B7280;
+                    font-size:12px;
+                ">
+                    Le cuisiniste prépare son projet
+                </p>
+
+            </div>
+
+            <div style="
+                background:#EFF6FF;
+                padding:22px;
+                border-radius:12px;
+            ">
+
+                <div style="font-size:35px;">📅</div>
+
+                <strong>Créneau disponible</strong>
+
+                <p style="
+                    color:#6B7280;
+                    font-size:12px;
+                ">
+                    La plateforme vérifie le planning
+                </p>
+
+            </div>
+
+            <div style="
+                background:#F0FDF4;
+                padding:22px;
+                border-radius:12px;
+            ">
+
+                <div style="font-size:35px;">⚡</div>
+
+                <strong>Chantier planifié</strong>
+
+                <p style="
+                    color:#6B7280;
+                    font-size:12px;
+                ">
+                    Le dossier rejoint votre espace
+                </p>
+
+            </div>
+
+            <div style="
+                background:#ECFDF5;
+                padding:22px;
+                border-radius:12px;
+            ">
+
+                <div style="font-size:35px;">💶</div>
+
+                <strong>CA généré</strong>
+
+                <p style="
+                    color:#6B7280;
+                    font-size:12px;
+                ">
+                    L'activité est suivie automatiquement
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="secure" style="margin-top:25px;">
+            🔒 Les données commerciales des partenaires restent confidentielles.
+            Le franchisé visualise uniquement les chantiers et l'activité qui concernent son antenne.
+        </div>
+
+    </section>
+
+    `;
+
+}
+
+function showPaiements() {
+
+    const main = document.querySelector('.main');
+
+    main.innerHTML = `
+
+    <div class="topbar">
+
+        <div class="welcome">
+            <h1>💶 Mes paiements</h1>
+            <p>Suivez votre chiffre d'affaires et vos virements en toute transparence.</p>
+        </div>
+
+        <button class="btn-light" onclick="location.reload()">
+            ← Retour au tableau de bord
+        </button>
+
+    </div>
+
+    <section style="
+        background:linear-gradient(135deg,#1E3A8A,#0F172A);
+        color:white;
+        padding:30px;
+        border-radius:18px;
+        margin-bottom:25px;
+        box-shadow:0 18px 35px rgba(30,58,138,0.20);
+    ">
+
+        <div style="
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            gap:30px;
+        ">
+
+            <div>
+
+                <div style="
+                    display:inline-block;
+                    background:#10B981;
+                    padding:7px 13px;
+                    border-radius:20px;
+                    font-size:12px;
+                    font-weight:800;
+                    margin-bottom:15px;
+                ">
+                    💶 TRANSPARENCE TOTALE
+                </div>
+
+                <h2 style="
+                    font-size:28px;
+                    margin:0 0 10px;
+                ">
+                    Vous savez exactement ce que vous allez toucher.
+                </h2>
+
+                <p style="
+                    color:#BFDBFE;
+                    margin:0;
+                    line-height:1.7;
+                ">
+                    Chaque chantier est calculé automatiquement.
+                    Les frais réseau sont détaillés et votre montant net est visible avant le virement.
+                </p>
+
+            </div>
+
+            <div style="font-size:60px;">
+                💳
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="stats">
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                CA DU MOIS
+            </div>
+
+            <div class="stat-value">
+                18 450 €
+            </div>
+
+            <div class="stat-note">
+                Août 2026
+            </div>
+
+        </div>
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                NET POSEUR
+            </div>
+
+            <div class="stat-value stat-green">
+                17 158,50 €
+            </div>
+
+            <div class="stat-note">
+                Après frais réseau
+            </div>
+
+        </div>
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                EN ATTENTE
+            </div>
+
+            <div class="stat-value">
+                2 650 €
+            </div>
+
+            <div class="stat-note">
+                PV chantier à valider
+            </div>
+
+        </div>
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                PROCHAIN VIREMENT
+            </div>
+
+            <div class="stat-value stat-green">
+                3 813,90 €
+            </div>
+
+            <div class="stat-note">
+                Prévu le 21 août
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="card">
+
+        <h3>💳 Prochain virement</h3>
+
+        <div style="
+            background:#F0FDF4;
+            border:1px solid #A7F3D0;
+            padding:25px;
+            border-radius:14px;
+            margin-top:20px;
+        ">
+
+            <div style="
+                display:flex;
+                justify-content:space-between;
+                align-items:center;
+                gap:20px;
+            ">
+
+                <div>
+
+                    <div style="
+                        font-size:13px;
+                        color:#047857;
+                        font-weight:800;
+                        margin-bottom:7px;
+                    ">
+                        VIREMENT PROGRAMMÉ
+                    </div>
+
+                    <div style="
+                        font-size:28px;
+                        font-weight:900;
+                        color:#065F46;
+                    ">
+                        3 813,90 €
+                    </div>
+
+                    <p style="
+                        color:#6B7280;
+                        margin-bottom:0;
+                    ">
+                        3 chantiers validés · Virement prévu le 21 août 2026
+                    </p>
+
+                </div>
+
+                <div style="
+                    font-size:50px;
+                ">
+                    🏦
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="card" style="margin-top:22px;">
+
+        <h3>📊 Détail de mes derniers chantiers</h3>
+
+        <div class="dossier-line">
+
+            <span>
+                Mobalpa · Chantier Robert
+            </span>
+
+            <strong>
+                1 350,00 € HT
+            </strong>
+
+        </div>
+
+        <div style="
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:12px;
+            background:#F9FAFB;
+            padding:15px;
+            border-radius:10px;
+            margin-bottom:18px;
+            font-size:13px;
+        ">
+
+            <div>
+                <span style="color:#6B7280;">Montant chantier</span><br>
+                <strong>1 350,00 €</strong>
+            </div>
+
+            <div>
+                <span style="color:#6B7280;">Frais réseau 7 %</span><br>
+                <strong style="color:#DC2626;">- 94,50 €</strong>
+            </div>
+
+            <div>
+                <span style="color:#6B7280;">Net poseur</span><br>
+                <strong style="color:#047857;">1 255,50 €</strong>
+            </div>
+
+        </div>
+
+        <div class="dossier-line">
+
+            <span>
+                Cuisine Plus · Chantier Bernard
+            </span>
+
+            <strong>
+                1 233,87 € HT
+            </strong>
+
+        </div>
+
+        <div style="
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:12px;
+            background:#F9FAFB;
+            padding:15px;
+            border-radius:10px;
+            margin-bottom:18px;
+            font-size:13px;
+        ">
+
+            <div>
+                <span style="color:#6B7280;">Montant chantier</span><br>
+                <strong>1 233,87 €</strong>
+            </div>
+
+            <div>
+                <span style="color:#6B7280;">Frais réseau 7 %</span><br>
+                <strong style="color:#DC2626;">- 86,37 €</strong>
+            </div>
+
+            <div>
+                <span style="color:#6B7280;">Net poseur</span><br>
+                <strong style="color:#047857;">1 147,50 €</strong>
+            </div>
+
+        </div>
+
+        <div class="dossier-line">
+
+            <span>
+                Schmidt · Chantier Leroy
+            </span>
+
+            <strong>
+                1 517,10 € HT
+            </strong>
+
+        </div>
+
+        <div style="
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:12px;
+            background:#F9FAFB;
+            padding:15px;
+            border-radius:10px;
+            font-size:13px;
+        ">
+
+            <div>
+                <span style="color:#6B7280;">Montant chantier</span><br>
+                <strong>1 517,10 €</strong>
+            </div>
+
+            <div>
+                <span style="color:#6B7280;">Frais réseau 7 %</span><br>
+                <strong style="color:#DC2626;">- 106,20 €</strong>
+            </div>
+
+            <div>
+                <span style="color:#6B7280;">Net poseur</span><br>
+                <strong style="color:#047857;">1 410,90 €</strong>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="card" style="margin-top:22px;">
+
+        <h3>🔄 Le parcours de votre paiement</h3>
+
+        <div style="
+            display:grid;
+            grid-template-columns:repeat(4,1fr);
+            gap:18px;
+            text-align:center;
+            margin-top:25px;
+        ">
+
+            <div style="
+                background:#EFF6FF;
+                padding:22px;
+                border-radius:12px;
+            ">
+
+                <div style="font-size:35px;">
+                    🔧
+                </div>
+
+                <strong>
+                    Pose terminée
+                </strong>
+
+                <p style="
+                    color:#6B7280;
+                    font-size:12px;
+                ">
+                    Vous validez le chantier
+                </p>
+
+            </div>
+
+            <div style="
+                background:#FFFBEB;
+                padding:22px;
+                border-radius:12px;
+            ">
+
+                <div style="font-size:35px;">
+                    ✍️
+                </div>
+
+                <strong>
+                    PV signé
+                </strong>
+
+                <p style="
+                    color:#6B7280;
+                    font-size:12px;
+                ">
+                    Le client valide la pose
+                </p>
+
+            </div>
+
+            <div style="
+                background:#F0FDF4;
+                padding:22px;
+                border-radius:12px;
+            ">
+
+                <div style="font-size:35px;">
+                    📄
+                </div>
+
+                <strong>
+                    Calcul automatique
+                </strong>
+
+                <p style="
+                    color:#6B7280;
+                    font-size:12px;
+                ">
+                    Net poseur calculé
+                </p>
+
+            </div>
+
+            <div style="
+                background:#ECFDF5;
+                padding:22px;
+                border-radius:12px;
+            ">
+
+                <div style="font-size:35px;">
+                    🏦
+                </div>
+
+                <strong>
+                    Virement
+                </strong>
+
+                <p style="
+                    color:#6B7280;
+                    font-size:12px;
+                ">
+                    Paiement programmé
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="secure" style="margin-top:25px;">
+            🔒 Chaque montant est tracé par chantier.
+            Le poseur visualise le montant chantier, les frais réseau appliqués et son montant net.
+        </div>
+
+    </section>
+
+    `;
+
+}
+function showDocuments() {
+
+    const main = document.querySelector('.main');
+
+    main.innerHTML = `
+
+    <div class="topbar">
+
+        <div class="welcome">
+            <h1>📄 Mes documents</h1>
+            <p>Tous vos documents chantier, générés et classés automatiquement.</p>
+        </div>
+
+        <button class="btn-light" onclick="location.reload()">
+            ← Retour au tableau de bord
+        </button>
+
+    </div>
+
+    <section style="
+        background:linear-gradient(135deg,#1E3A8A,#0F172A);
+        color:white;
+        padding:30px;
+        border-radius:18px;
+        margin-bottom:25px;
+        box-shadow:0 18px 35px rgba(30,58,138,0.20);
+    ">
+
+        <div style="
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            gap:30px;
+        ">
+
+            <div>
+
+                <div style="
+                    display:inline-block;
+                    background:#10B981;
+                    padding:7px 13px;
+                    border-radius:20px;
+                    font-size:12px;
+                    font-weight:800;
+                    margin-bottom:15px;
+                ">
+                    ⚡ ZÉRO PAPERASSE
+                </div>
+
+                <h2 style="
+                    font-size:28px;
+                    margin:0 0 10px;
+                ">
+                    Aucun document à créer.
+                </h2>
+
+                <p style="
+                    color:#BFDBFE;
+                    margin:0;
+                    line-height:1.7;
+                ">
+                    Devis, PV, factures et documents réseau :
+                    tout est généré, classé et archivé automatiquement.
+                </p>
+
+            </div>
+
+            <div style="
+                font-size:60px;
+            ">
+                📂
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="stats">
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                DEVIS SIGNÉS
+            </div>
+
+            <div class="stat-value">
+                18
+            </div>
+
+            <div class="stat-note">
+                Archivés automatiquement
+            </div>
+
+        </div>
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                PV DE CHANTIER
+            </div>
+
+            <div class="stat-value stat-green">
+                14
+            </div>
+
+            <div class="stat-note">
+                Signés électroniquement
+            </div>
+
+        </div>
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                FACTURES
+            </div>
+
+            <div class="stat-value">
+                12
+            </div>
+
+            <div class="stat-note">
+                Générées automatiquement
+            </div>
+
+        </div>
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                DOCUMENTS À CRÉER
+            </div>
+
+            <div class="stat-value stat-green">
+                0
+            </div>
+
+            <div class="stat-note">
+                La plateforme s'en charge
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="card">
+
+        <h3>📁 Mes derniers documents</h3>
+
+        <div class="dossier-line">
+
+            <span>
+                📄 Devis signé
+            </span>
+
+            <strong>
+                LPC-D2026-08972 · Martin
+                <button
+                    onclick="fakeDownload('Devis signé LPC-D2026-08972')"
+                    style="
+                        margin-left:15px;
+                        border:none;
+                        background:#EFF6FF;
+                        color:#1E3A8A;
+                        padding:7px 12px;
+                        border-radius:6px;
+                        font-weight:700;
+                        cursor:pointer;
+                    "
+                >
+                    Voir
+                </button>
+            </strong>
+
+        </div>
+
+        <div class="dossier-line">
+
+            <span>
+                ✍️ PV de fin de chantier
+            </span>
+
+            <strong>
+                LPC-PV-2026-08741 · Robert
+                <button
+                    onclick="fakeDownload('PV signé LPC-PV-2026-08741')"
+                    style="
+                        margin-left:15px;
+                        border:none;
+                        background:#F0FDF4;
+                        color:#047857;
+                        padding:7px 12px;
+                        border-radius:6px;
+                        font-weight:700;
+                        cursor:pointer;
+                    "
+                >
+                    Voir
+                </button>
+            </strong>
+
+        </div>
+
+        <div class="dossier-line">
+
+            <span>
+                💶 Facture générée
+            </span>
+
+            <strong>
+                LPC-F2026-08698 · Bernard
+                <button
+                    onclick="fakeDownload('Facture LPC-F2026-08698')"
+                    style="
+                        margin-left:15px;
+                        border:none;
+                        background:#F0FDF4;
+                        color:#047857;
+                        padding:7px 12px;
+                        border-radius:6px;
+                        font-weight:700;
+                        cursor:pointer;
+                    "
+                >
+                    Voir
+                </button>
+            </strong>
+
+        </div>
+
+        <div class="dossier-line">
+
+            <span>
+                🛡️ Attestation réseau
+            </span>
+
+            <strong>
+                Certification Poseur Chrono 2026
+                <button
+                    onclick="fakeDownload('Attestation réseau Poseur Chrono 2026')"
+                    style="
+                        margin-left:15px;
+                        border:none;
+                        background:#EFF6FF;
+                        color:#1E3A8A;
+                        padding:7px 12px;
+                        border-radius:6px;
+                        font-weight:700;
+                        cursor:pointer;
+                    "
+                >
+                    Voir
+                </button>
+            </strong>
+
+        </div>
+
+    </section>
+
+    <section class="card" style="margin-top:22px;">
+
+        <h3>⚡ Ce que la plateforme gère pour vous</h3>
+
+        <div style="
+            display:grid;
+            grid-template-columns:repeat(4,1fr);
+            gap:18px;
+            text-align:center;
+            margin-top:25px;
+        ">
+
+            <div style="
+                background:#EFF6FF;
+                padding:22px;
+                border-radius:12px;
+            ">
+
+                <div style="font-size:35px;">
+                    📝
+                </div>
+
+                <strong>
+                    Devis
+                </strong>
+
+                <p style="
+                    color:#6B7280;
+                    font-size:12px;
+                ">
+                    Généré depuis le simulateur
+                </p>
+
+            </div>
+
+            <div style="
+                background:#F0FDF4;
+                padding:22px;
+                border-radius:12px;
+            ">
+
+                <div style="font-size:35px;">
+                    ✍️
+                </div>
+
+                <strong>
+                    Signature
+                </strong>
+
+                <p style="
+                    color:#6B7280;
+                    font-size:12px;
+                ">
+                    Validation électronique
+                </p>
+
+            </div>
+
+            <div style="
+                background:#EFF6FF;
+                padding:22px;
+                border-radius:12px;
+            ">
+
+                <div style="font-size:35px;">
+                    📄
+                </div>
+
+                <strong>
+                    Facture
+                </strong>
+
+                <p style="
+                    color:#6B7280;
+                    font-size:12px;
+                ">
+                    Créée automatiquement
+                </p>
+
+            </div>
+
+            <div style="
+                background:#F0FDF4;
+                padding:22px;
+                border-radius:12px;
+            ">
+
+                <div style="font-size:35px;">
+                    📂
+                </div>
+
+                <strong>
+                    Archivage
+                </strong>
+
+                <p style="
+                    color:#6B7280;
+                    font-size:12px;
+                ">
+                    Classé par chantier
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="secure" style="margin-top:25px;">
+            ⚡ Votre travail : poser la cuisine et valider la fin du chantier.
+            Les Poseurs Chrono prend en charge le parcours administratif de la plateforme.
+        </div>
+
+    </section>
+
+    `;
+
+}
+
+
+function fakeDownload(documentName) {
+
+    alert(
+        'MODE DÉMONSTRATION\\n\\n' +
+        documentName +
+        '\\n\\nDans la version finale, le document PDF sera généré, archivé et accessible depuis cet espace.'
+    );
+
+}
+
+function showChantiers() {
+
+    const main = document.querySelector('.main');
+
+    main.innerHTML = `
+
+    <div class="topbar">
+
+        <div class="welcome">
+            <h1>🧰 Mes chantiers</h1>
+            <p>Suivez vos poses. La plateforme gère l'administratif.</p>
+        </div>
+
+        <button class="btn-light" onclick="location.reload()">
+            ← Retour au tableau de bord
+        </button>
+
+    </div>
+
+    <section class="card">
+
+        <h3>⚡ Suivi automatique de mes chantiers</h3>
+
+        <p style="color:#6B7280;line-height:1.7;">
+            Chaque chantier avance automatiquement dans votre espace.
+            Vous vous concentrez sur la pose.
+            Les Poseurs Chrono gère les documents, la facturation
+            et le suivi administratif.
+        </p>
+
+        <div class="secure">
+            ⚡ ZÉRO PAPERASSE : vous posez, vous validez la fin du chantier,
+            la plateforme déclenche le processus administratif.
+        </div>
+
+    </section>
+
+    <section style="
+        display:grid;
+        grid-template-columns:repeat(5,1fr);
+        gap:15px;
+        margin-top:22px;
+    ">
+
+        <div class="card" style="border-top:5px solid #1E3A8A;">
+
+            <h3>📅 À VENIR</h3>
+
+            <div style="
+                background:#EFF6FF;
+                padding:15px;
+                border-radius:10px;
+            ">
+
+                <strong>Cuisineandcie</strong>
+
+                <p style="font-size:13px;color:#6B7280;">
+                    M. & Mme Martin<br>
+                    Saint-Étienne<br>
+                    18 août · 08h00
+                </p>
+
+                <strong style="color:#1E3A8A;">
+                    1 350 € HT
+                </strong>
+
+            </div>
+
+        </div>
+
+        <div class="card" style="border-top:5px solid #2563EB;">
+
+            <h3>🔧 EN COURS</h3>
+
+            <div style="
+                background:#EFF6FF;
+                padding:15px;
+                border-radius:10px;
+            ">
+
+                <strong>Schmidt</strong>
+
+                <p style="font-size:13px;color:#6B7280;">
+                    M. Dupont<br>
+                    Firminy<br>
+                    Démarré ce matin
+                </p>
+
+                <button
+                    class="btn-green"
+                    onclick="finishJob(this)"
+                    style="width:100%;padding:9px;"
+                >
+                    Terminer la pose
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="card" style="border-top:5px solid #F59E0B;">
+
+            <h3>✍️ PV À SIGNER</h3>
+
+            <div id="pv-zone" style="
+                background:#FFFBEB;
+                padding:15px;
+                border-radius:10px;
+            ">
+
+                <strong>En attente</strong>
+
+                <p style="font-size:13px;color:#6B7280;">
+                    Aucun PV à signer actuellement.
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="card" style="border-top:5px solid #10B981;">
+
+            <h3>✓ TERMINÉ</h3>
+
+            <div style="
+                background:#F0FDF4;
+                padding:15px;
+                border-radius:10px;
+            ">
+
+                <strong>Mobalpa</strong>
+
+                <p style="font-size:13px;color:#6B7280;">
+                    Mme Robert<br>
+                    Saint-Chamond<br>
+                    PV signé le 12 août
+                </p>
+
+                <strong style="color:#047857;">
+                    Chantier validé
+                </strong>
+
+            </div>
+
+        </div>
+
+        <div class="card" style="border-top:5px solid #059669;">
+
+            <h3>💶 PAIEMENT</h3>
+
+            <div style="
+                background:#ECFDF5;
+                padding:15px;
+                border-radius:10px;
+            ">
+
+                <strong>Cuisine Plus</strong>
+
+                <p style="font-size:13px;color:#6B7280;">
+                    Chantier Bernard<br>
+                    PV validé<br>
+                    Facture générée
+                </p>
+
+                <strong style="color:#059669;">
+                    1 147,50 € NET
+                </strong>
+
+                <p style="
+                    font-size:11px;
+                    color:#6B7280;
+                    margin-bottom:0;
+                ">
+                    Virement programmé
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="card" style="margin-top:22px;">
+
+        <h3>🔄 Le parcours Chrono</h3>
+
+        <div style="
+            display:grid;
+            grid-template-columns:repeat(5,1fr);
+            text-align:center;
+            gap:10px;
+            margin-top:25px;
+        ">
+
+            <div>
+                <div style="font-size:30px;">📅</div>
+                <strong>Chantier planifié</strong>
+            </div>
+
+            <div>
+                <div style="font-size:30px;">🔧</div>
+                <strong>Pose réalisée</strong>
+            </div>
+
+            <div>
+                <div style="font-size:30px;">✍️</div>
+                <strong>PV signé</strong>
+            </div>
+
+            <div>
+                <div style="font-size:30px;">📄</div>
+                <strong>Facture générée</strong>
+            </div>
+
+            <div>
+                <div style="font-size:30px;">💶</div>
+                <strong>Paiement déclenché</strong>
+            </div>
+
+        </div>
+
+    </section>
+
+    `;
+
+}
+
+
+function finishJob(button) {
+
+    button.innerHTML = '✓ Pose terminée';
+
+    button.disabled = true;
+
+    button.style.background = '#D1FAE5';
+
+    button.style.color = '#047857';
+
+    const pvZone = document.getElementById('pv-zone');
+
+    pvZone.innerHTML = `
+
+        <strong>Schmidt · M. Dupont</strong>
+
+        <p style="font-size:13px;color:#6B7280;">
+            Chantier terminé.<br>
+            PV de fin de chantier prêt.
+        </p>
+
+        <button
+            class="btn-green"
+            onclick="signPV(this)"
+            style="width:100%;padding:9px;"
+        >
+            ✍️ Faire signer le PV
+        </button>
+
+    `;
+
+}
+
+
+function signPV(button) {
+
+    button.parentElement.innerHTML = `
+
+        <strong style="color:#047857;">
+            ✓ PV SIGNÉ ÉLECTRONIQUEMENT
+        </strong>
+
+        <p style="font-size:13px;color:#6B7280;">
+            Chantier Dupont validé.<br>
+            Facture générée automatiquement.<br>
+            Paiement en cours de déclenchement.
+        </p>
+
+        <div style="
+            background:#D1FAE5;
+            color:#047857;
+            padding:10px;
+            border-radius:8px;
+            font-weight:800;
+            margin-top:10px;
+        ">
+            💶 PROCESSUS DE PAIEMENT DÉCLENCHÉ
+        </div>
+
+    `;
+
+}
+
+function verifierNouveauChantier() {
+
+    const chantier = localStorage.getItem("lpc_nouveau_chantier");
+
+    if(!chantier){
+        return;
+    }
+
+    const data = JSON.parse(chantier);
+const jobClient = document.getElementById("jobClient");
+
+if (jobClient) {
+    jobClient.textContent = data.client + " · " + data.adresse;
+}
+const jobMontantHT = document.getElementById("jobMontantHT");
+
+if (jobMontantHT) {
+    jobMontantHT.textContent = data.montantHT + " € HT";
+}
+
+const jobDuree = document.getElementById("jobDuree");
+
+if (jobDuree) {
+    jobDuree.textContent = data.duree;
+}
+const dossierClient = document.getElementById("dossierClient");
+const dossierDate = document.getElementById("dossierDate");
+const dossierDuree = document.getElementById("dossierDuree");
+const dossierMontant = document.getElementById("dossierMontant");
+
+if (dossierClient) {
+    dossierClient.textContent = data.client;
+}
+
+if (dossierDate) {
+    dossierDate.textContent = data.date;
+}
+
+if (dossierDuree) {
+    dossierDuree.textContent = data.duree;
+}
+
+if (dossierMontant) {
+    dossierMontant.textContent = data.montantHT + " € HT";
+}
+    alert(
+    "🚀 Nouveau chantier reçu !\n\n" +
+    "Client : " + data.client +
+    "\nAdresse : " + data.adresse +
+    "\nDate : " + data.date +
+    "\nDurée : " + data.duree +
+    "\n\nMontant HT : " + data.montantHT + " €" +
+    "\nMontant TTC : " + data.montantTTC + " €"
+);
+
+}
+
+function openDossier() {
+    document.getElementById('dossierModal').style.display = 'flex';
+}
+
+function closeDossier() {
+    document.getElementById('dossierModal').style.display = 'none';
+}
+
+function confirmJob(button) {
+
+    button.innerHTML = '✓ Prise en charge confirmée';
+
+    button.style.background = '#D1FAE5';
+
+    button.style.color = '#047857';
+
+    button.disabled = true;
+
+}
+
+window.onclick = function(event) {
+
+    const modal = document.getElementById('dossierModal');
+
+    if (event.target === modal) {
+        closeDossier();
+    }
+
+}
+
+verifierNouveauChantier();
+
+</script>
+
+</body>
+
+</html>

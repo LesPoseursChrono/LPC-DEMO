@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurateur de Devis - Les Poseurs Chrono</title>
+    <style>
+        :root {
+            --blue-chrono: #1E3A8A;
+            --green-chrono: #10B981;
+            --dark-text: #1F2937;
+            --light-bg: #F3F4F6;
+            --border-color: #E5E7EB;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .main-wrapper {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 25px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .panel {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+        }
+
+        h2 {
+            color: var(--blue-chrono);
+            border-bottom: 2px solid var(--blue-chrono);
+            padding-bottom: 8px;
+            margin-top: 0;
+            font-size: 1.4rem;
+        }
+
+        /* Formulaire */
+        .item-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .item-info { max-width: 70%; }
+        .item-title { font-weight: 600; font-size: 1rem; }
+        .item-desc { font-size: 0.85rem; color: #6B7280; }
+        
+        .counter {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .btn-count {
+            background: var(--blue-chrono);
+            color: white;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .counter input {
+            width: 40px;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 4px;
+        }
+
+        /* Boutons d'options */
+        .radio-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .radio-box {
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            padding: 15px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s;
+        }
+        .radio-box input { position: absolute; top: 15px; right: 15px; }
+        .radio-box.active {
+            border-color: var(--green-chrono);
+            background-color: #F0FDF4;
+        }
+        .radio-box.active-blue {
+            border-color: var(--blue-chrono);
+            background-color: #EFF6FF;
+        }
+
+        /* Aperçu du Devis */
+        .invoice-preview {
+            border: 1px solid #D1D5DB;
+            padding: 25px;
+            border-radius: 4px;
+            background: #fff;
+        }
+        .invoice-header {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 2px solid var(--blue-chrono);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        .logo { font-weight: 800; font-size: 1.3rem; color: var(--blue-chrono); }
+        .logo span { color: var(--green-chrono); }
+
+        .invoice-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+        .invoice-table th { text-align: left; padding: 8px; border-bottom: 2px solid #000; }
+        .invoice-table td { padding: 8px; border-bottom: 1px solid var(--border-color); }
+        
+        .total-zone {
+            text-align: right;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        .grand-total {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--blue-chrono);
+        }
+
+        .btn-print {
+            width: 100%;
+            background: var(--green-chrono);
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 900px) {
+            .main-wrapper { grid-template-columns: 1fr; }
+        }
+
+        @media print {
+            body { background: white; padding: 0; }
+            .panel:first-child, .btn-print { display: none; }
+            .main-wrapper { grid-template-columns: 1fr; }
+            .panel { box-shadow: none; padding: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-wrapper">
+    
+    <!-- PANNEAU DE CONFIGURATION -->
+    <div class="panel">
+        <h2>⏱️ Configurateur Les Poseurs Chrono</h2>
+        
+        <p><strong>Étape 1 : Sélectionnez le type d'engagement</strong></p>
+        <div class="radio-group">
+            <div class="radio-box" id="box-opt1" onclick="setOption('opt1')">
+                <input type="radio" id="opt1" name="previsite" value="100">
+                <div style="font-weight:bold; color:var(--blue-chrono);">Option 1</div>
+                <div style="font-size:0.85rem; margin-top:5px;"><strong>Pré-visite Seule (100 € HT)</strong><br>Cotes certifiées sans pose engagée.</div>
+            </div>
+            <div class="radio-box " id="box-opt2" onclick="setOption('opt2')">
+                <input type="radio" id="opt2" name="previsite" value="0" checked>
+                <div style="font-weight:bold; color:var(--green-chrono);">Option 2</div>
+                <div style="font-size:0.85rem; margin-top:5px;"><strong>Formule Pose Engagée</strong><br>Pré-visite intégrée et <strong>OFFERTE</strong>.</div>
+            </div>
+        </div>
+
+        <p><strong>Étape 2 : Saisissez les éléments du projet</strong></p>
+        
+        <div id="items-container">
+            <!-- Injecté par JavaScript -->
+        </div>
+
+        <div style="margin-top:20px;">
+            <label style="font-weight: bold; display: block; margin-bottom: 5px;">Forfait Déplacement Zone Élargie (30 à 65 km)</label>
+            <select id="deplacement" onchange="calculateTotal()" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid var(--border-color);">
+                <option value="0">Non - Chantier à moins de 30 km (Inclus)</option>
+                <option value="1">Oui - Zone Élargie 30 à 65 km (+1 Point / 60€ HT)</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- PANNEAU APERÇU DU DEVIS DIRECT -->
+    <div class="panel">
+        <h2>📄 Devis Instantané</h2>
+        <div class="invoice-preview" id="invoice">
+            <div class="invoice-header">
+                <div class="logo">Les Poseurs <span>Chrono</span></div>
+                <div style="text-align: right; font-size: 0.8rem; color: #6B7280;">
+                    Réseau National France<br>
+                    Devis généré le : <span id="current-date"></span>
+                </div>
+            </div>
+
+            <table class="invoice-table">
+                <thead>
+                    <tr>
+                        <th>Prestation / Élément</th>
+                        <th style="text-align: center;">Qté</th>
+                        <th style="text-align: right;">Total HT</th>
+                    </tr>
+                </thead>
+                <tbody id="invoice-rows">
+                    <!-- Rempli en JS -->
+                </tbody>
+            </table>
+
+            <div class="total-zone">
+                <div>Total Brut HT : <span id="total-brut-ht">0.00</span> €</div>
+                <div style="color: var(--green-chrono); font-weight: bold;" id="row-remise">Remise Pré-visite Offerte : -100.00 €</div>
+                <div>Total Général HT : <span id="total-ht">0.00</span> €</div>
+                <div>TVA (20%) : <span id="total-tva">0.00</span> €</div>
+                <div class="grand-total">Montant Total TTC : <span id="total-ttc">0.00</span> €</div>
+            </div>
+            
+            <div style="margin-top: 20px; font-size: 0.75rem; color: #9CA3AF; border-top: 1px solid var(--border-color); padding-top: 10px;">
+                Tiers de confiance : Les fonds sont bloqués sur la plateforme et versés à l'artisan après signature du PV de fin de chantier.
+            </div>
+        </div>
+        <button class="btn-print" onclick="window.print()">🖨️ Imprimer ou Sauvegarder en PDF</button>
+    </div>
+</div>
+
+<script>
+    // Configuration des données du Réseau[cite: 3]
+    const pricingData = [
+        { id: 'meuble', name: 'Meuble cuisine standard (Bas/Haut/LV)', desc: 'Montage, fixation, poignées, emballages', points: 1 },
+        { id: 'colonne', name: 'Colonne / Armoire Haute', desc: 'Montage, calage électroménager encastré', points: 2 },
+        { id: 'plan', name: 'Plan de travail', desc: 'Mise en place, 1 découpe incluse (évier/plaque)', points: 1 },
+        { id: 'credence', name: 'Crédence', desc: 'Pose et perçages jusqu\'à 2 prises', points: 1 },
+        { id: 'plinthe', name: 'Plinthes du projet', desc: 'Découpe et ajustement complet', points: 1 },
+        { id: 'premium', name: 'Ajustement Finition Premium', desc: 'Si > 2 fileurs et > 2 panneaux finitions', points: 1 },
+        { id: 'electromenager à poser', name: 'Électroménagers', desc: 'Fixation, mise en place et branchement sur alimentation existante (sans modification électrique ou plomberie).', points: 1 }
+    ];
+
+    const POINT_VALUE = 60; // 60€ HT le point[cite: 3]
+    let quantities = {};
+
+    // Initialisation du formulaire
+    function init() {
+        document.getElementById('current-date').innerText = new Date().toLocaleDateString('fr-FR');
+        const container = document.getElementById('items-container');
+        
+        pricingData.forEach(item => {
+            quantities[item.id] = 0;
+            
+            const row = document.createElement('div');
+            row.className = 'item-row';
+            row.innerHTML = `
+                <div class="item-info">
+                    <div class="item-title">${item.name}</div>
+                    <div class="item-desc">${item.desc} (${item.points} Pt${item.points>1?'s':''})</div>
+                </div>
+                <div class="counter">
+                    <button class="btn-count" onclick="updateQty('${item.id}', -1)">-</button>
+                    <input type="text" id="input-${item.id}" value="0" readonly>
+                    <button class="btn-count" onclick="updateQty('${item.id}', 1)">+</button>
+                </div>
+            `;
+            container.appendChild(row);
+        });
+        setOption('opt2');
+    }
+
+    function updateQty(id, delta) {
+        quantities[id] = Math.max(0, quantities[id] + delta);
+        document.getElementById(`input-${id}`).value = quantities[id];
+        calculateTotal();
+    }
+
+    function setOption(optId) {
+        document.getElementById(optId).checked = true;
+        if(optId === 'opt1') {
+            document.getElementById('box-opt1').className = 'radio-box active-blue';
+            document.getElementById('box-opt2').className = 'radio-box';
+        } else {
+            document.getElementById('box-opt1').className = 'radio-box';
+            document.getElementById('box-opt2').className = 'radio-box active';
+        }
+        calculateTotal();
+    }
+
+    function calculateTotal() {
+        const invoiceRows = document.getElementById('invoice-rows');
+        invoiceRows.innerHTML = '';
+        
+        let totalPoints = 0;
+        let totalBrutHT = 0;
+
+        // 1. Gestion de la ligne Pré-visite obligatoire[cite: 3]
+        const isPoseEngagee = document.getElementById('opt2').checked;
+        
+        let rowPrevisite = `<tr><td><strong>Diagnostic &amp; Pré-visite Technique</strong></td><td style="text-align:center;">1</td><td style="text-align:right;">100.00 €</td></tr>`;
+        invoiceRows.innerHTML += rowPrevisite;
+        totalBrutHT += 100;
+
+        // 2. Calcul des éléments de pose (uniquement si Pose Engagée cochée)
+        if (isPoseEngagee) {
+            pricingData.forEach(item => {
+                const qty = quantities[item.id];
+                if (qty > 0) {
+                    const itemCost = qty * item.points * POINT_VALUE;
+                    totalBrutHT += itemCost;
+                    
+                    let row = `<tr>
+                        <td><strong>${item.name}</strong><br><span class="item-desc">${item.points * qty} Point${item.points*qty>1?'s':''}</span></td>
+                        <td style="text-align:center;">${qty}</td>
+                        <td style="text-align:right;">${itemCost.toFixed(2)} €</td>
+                    </tr>`;
+                    invoiceRows.innerHTML += row;
+                }
+            });
+
+            // Forfait déplacement[cite: 3]
+            const deplacementQty = parseInt(document.getElementById('deplacement').value);
+            if (deplacementQty > 0) {
+                const deplacementCost = deplacementQty * POINT_VALUE;
+                totalBrutHT += deplacementCost;
+                invoiceRows.innerHTML += `<tr><td><strong>Forfait Déplacement Zone Élargie (30-65km)</strong></td><td style="text-align:center;">1</td><td style="text-align:right;">${deplacementCost.toFixed(2)} €</td></tr>`;
+            }
+        }
+
+        // 3. Application de la remise Option 2 (Gratuité)
+        let remise = 0;
+        if (isPoseEngagee) {
+            remise = 100;
+            document.getElementById('row-remise').style.display = 'block';
+        } else {
+            document.getElementById('row-remise').style.display = 'none';
+        }
+
+        let totalHT = totalBrutHT - remise;
+        let tva = totalHT * 0.20;
+        let ttc = totalHT + tva;
+
+        // Remplissage des totaux de l'aperçu
+        document.getElementById('total-brut-ht').innerText = totalBrutHT.toFixed(2);
+        document.getElementById('total-ht').innerText = totalHT.toFixed(2);
+        document.getElementById('total-tva').innerText = tva.toFixed(2);
+        document.getElementById('total-ttc').innerText = ttc.toFixed(2);
+    }
+
+    window.onload = init;
+</script>
+</body>
+</html>

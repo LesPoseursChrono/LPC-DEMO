@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Transmission du chantier | Les Poseurs Chrono</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    background:linear-gradient(135deg,#1E3A8A,#0F172A);
+
+    color:white;
+
+    font-family:Segoe UI,Arial,sans-serif;
+
+    height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.container{
+
+    width:700px;
+
+    max-width:90%;
+
+    background:rgba(255,255,255,.08);
+
+    border:1px solid rgba(255,255,255,.15);
+
+    border-radius:20px;
+
+    padding:50px;
+
+    text-align:center;
+
+    backdrop-filter:blur(10px);
+
+    box-shadow:0 25px 60px rgba(0,0,0,.35);
+
+}
+
+.logo{
+
+    font-size:38px;
+
+    font-weight:900;
+
+    margin-bottom:15px;
+
+}
+
+.logo span{
+
+    color:#10B981;
+
+}
+
+h1{
+
+    margin-bottom:15px;
+
+    font-size:30px;
+
+}
+
+p{
+
+    color:#BFDBFE;
+
+    line-height:1.8;
+
+    font-size:18px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="logo">
+
+Les Poseurs <span>Chrono</span>
+
+</div>
+
+<h1>
+
+Transmission sécurisée...
+
+</h1>
+
+<div id="status" style="margin-top:35px;text-align:left;font-size:18px;line-height:2.2;">
+
+    ⏳ Vérification du devis...
+
+</div>
+
+<div style="
+margin-top:35px;
+height:18px;
+background:rgba(255,255,255,.15);
+border-radius:20px;
+overflow:hidden;
+">
+
+    <div id="barre" style="
+    width:0%;
+    height:100%;
+    background:#10B981;
+    transition:width .5s;
+    "></div>
+
+</div>
+</div>
+<script>
+
+const etapes = [
+    "✅ Contrat signé",
+    "💳 Paiement sécurisé",
+    "📁 Création du dossier chantier",
+    "👷 Affectation automatique du franchisé",
+    "🚀 Ouverture de l'espace franchisé..."
+];
+
+let index = 0;
+
+const status = document.getElementById("status");
+const barre = document.getElementById("barre");
+
+function suivant() {
+
+    status.innerHTML += "<br>" + etapes[index];
+
+    barre.style.width = ((index + 1) / etapes.length * 100) + "%";
+
+    index++;
+
+    if (index < etapes.length) {
+
+        setTimeout(suivant, 700);
+
+    } else {
+
+        setTimeout(() => {
+
+            window.location.href = "espace-franchise.html";
+
+        }, 1000);
+
+    }
+
+}
+
+setTimeout(suivant, 700);
+
+</script>
+</body>
+
+</html>
